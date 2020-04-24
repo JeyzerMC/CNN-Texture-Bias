@@ -71,8 +71,8 @@ Abder Bouziane$^1$\
 $^1$Déparetement GIGL Polytechnique Montreal\\
 \emails
 andre.diler@polymtl.ca,
-third@other.example.com,
-fourth@example.com
+jeyzer@mc.com,
+honey@spoon.com
 }
 
 \begin{document}
@@ -90,7 +90,7 @@ fourth@example.com
 
 It is common knowledge that the 
 
-\subsection{Previous Work}
+\section{Related Work}
 
 All paper {\em submissions} must have a maximum of six pages, plus at most one for references. The seventh page cannot contain {\bf anything} other than references.
 
@@ -98,157 +98,20 @@ The length rules may change for final camera-ready versions of accepted papers, 
 
 If your paper is accepted, please carefully read the notifications you receive, and check the proceedings submission information website\footnote{\url{https://proceedings.ijcai.org/info}} to know how many pages you can finally use (and whether there is a special references-only page or not). That website holds the most up-to-date information regarding paper length limits at all times.
 
-\subsection{Word Processing Software}
+\section{Methodology}
 
 As detailed below, IJCAI has prepared and made available a set of
 \LaTeX{} macros and a Microsoft Word template for use in formatting
 your paper. If you are using some other word processing software, please follow the format instructions given below and ensure that your final paper looks as much like this sample as possible.
 
+\subsection{Dataset}
+\subsection{ResNet}
+\subsubsection{Architecture}
+\subsubsection{Loss Function}
+
+\subsection{Other Model}
+
 \section{Style and Format}
-
-\LaTeX{} and Word style files that implement these instructions
-can be retrieved electronically. (See Appendix~\ref{stylefiles} for
-instructions on how to obtain these files.)
-
-\subsection{Layout}
-
-Print manuscripts two columns to a page, in the manner in which these
-instructions are printed. The exact dimensions for pages are:
-\begin{itemize}
-\item left and right margins: .75$''$
-\item column width: 3.375$''$
-\item gap between columns: .25$''$
-\item top margin---first page: 1.375$''$
-\item top margin---other pages: .75$''$
-\item bottom margin: 1.25$''$
-\item column height---first page: 6.625$''$
-\item column height---other pages: 9$''$
-\end{itemize}
-
-All measurements assume an 8-1/2$''$ $\times$ 11$''$ page size. For
-A4-size paper, use the given top and left margins, column width,
-height, and gap, and modify the bottom and right margins as necessary.
-
-\subsection{Format of Electronic Manuscript}
-
-For the production of the electronic manuscript, you must use Adobe's
-{\em Portable Document Format} (PDF). A PDF file can be generated, for
-instance, on Unix systems using {\tt ps2pdf} or on Windows systems
-using Adobe's Distiller. There is also a website with free software
-and conversion services: \url{http://www.ps2pdf.com}. For reasons of
-uniformity, use of Adobe's {\em Times Roman} font is strongly suggested. In
-\LaTeX2e{}, this is accomplished by putting
-\begin{quote} 
-\mbox{\tt $\backslash$usepackage\{times\}}
-\end{quote}
-in the preamble.\footnote{You may want also to use the package {\tt
-latexsym}, which defines all symbols known from the old \LaTeX{}
-version.}
-  
-Additionally, it is of utmost importance to specify the American {\bf
-letter} format (corresponding to 8-1/2$''$ $\times$ 11$''$) when
-formatting the paper. When working with {\tt dvips}, for instance, one
-should specify {\tt -t letter}.
-
-\subsection{Title and Author Information}
-
-Center the title on the entire width of the page in a 14-point bold
-font. The title should be capitalized using Title Case. Below it, center author name(s) in  12-point bold font. On the following line(s) place the affiliations, each affiliation on its own line using 12-point regular font. Matching between authors and affiliations can be done using numeric superindices. Optionally, a comma-separated list of email addresses follows the affiliation(s) line(s), using  12-point regular font.
-
-\subsubsection{Blind Review}
-
-In order to make blind reviewing possible, authors must omit their
-names and affiliations when submitting the paper for review. In place
-of names and affiliations, provide a list of content areas. When
-referring to one's own work, use the third person rather than the
-first person. For example, say, ``Previously,
-Gottlob~\shortcite{gottlob:nonmon} has shown that\ldots'', rather
-than, ``In our previous work~\cite{gottlob:nonmon}, we have shown
-that\ldots'' Try to avoid including any information in the body of the
-paper or references that would identify the authors or their
-institutions. Such information can be added to the final camera-ready
-version for publication.
-
-\subsection{Abstract}
-
-Place the abstract at the beginning of the first column 3$''$ from the
-top of the page, unless that does not leave enough room for the title
-and author information. Use a slightly smaller width than in the body
-of the paper. Head the abstract with ``Abstract'' centered above the
-body of the abstract in a 12-point bold font. The body of the abstract
-should be in the same font as the body of the paper.
-
-The abstract should be a concise, one-paragraph summary describing the
-general thesis and conclusion of your paper. A reader should be able
-to learn the purpose of the paper and the reason for its importance
-from the abstract. The abstract should be no more than 200 words long.
-
-\subsection{Text}
-
-The main body of the text immediately follows the abstract. Use
-10-point type in a clear, readable font with 1-point leading (10 on
-11).
-
-Indent when starting a new paragraph, except after major headings.
-
-\subsection{Headings and Sections}
-
-When necessary, headings should be used to separate major sections of
-your paper. (These instructions use many headings to demonstrate their
-appearance; your paper should have fewer headings.). All headings should be capitalized using Title Case.
-
-\subsubsection{Section Headings}
-
-Print section headings in 12-point bold type in the style shown in
-these instructions. Leave a blank space of approximately 10 points
-above and 4 points below section headings.  Number sections with
-arabic numerals.
-
-\subsubsection{Subsection Headings}
-
-Print subsection headings in 11-point bold type. Leave a blank space
-of approximately 8 points above and 3 points below subsection
-headings. Number subsections with the section number and the
-subsection number (in arabic numerals) separated by a
-period.
-
-\subsubsection{Subsubsection Headings}
-
-Print subsubsection headings in 10-point bold type. Leave a blank
-space of approximately 6 points above subsubsection headings. Do not
-number subsubsections.
-
-\paragraph{Titled paragraphs.} You can use titled paragraphs if and 
-only if the title covers exactly one paragraph. Such paragraphs must be
-separated from the preceding content by at least 3pt, and no more than
-6pt. The title must be in 10pt bold font and ended with a period. 
-After that, a 1em horizontal space must follow the title before 
-the paragraph's text.
-
-In \LaTeX{} titled paragraphs must be typeset using
-\begin{quote}
-{\tt \textbackslash{}paragraph\{Title.\} text} .
-\end{quote}
-
-\subsubsection{Acknowledgements}
-
-You may include an unnumbered acknowledgments section, including
-acknowledgments of help from colleagues, financial support, and
-permission to publish. If present, acknowledgements must be in a dedicated,
-unnumbered section appearing after all regular sections but before any
-appendices or references.
-
-Use 
-\begin{quote}
-    {\tt \textbackslash{}section*\{Acknowledgements\}})
-\end{quote}
-to typeset the acknowledgements section in \LaTeX{}.
-
-\subsubsection{Appendices}
-
-Any appendices directly follow the text and look like sections, except
-that they are numbered with capital letters instead of arabic
-numerals. See this document for an example.
 
 \subsubsection{References}
 
