@@ -81,35 +81,51 @@ abderahmane.bouziane@polymtl.ca
 \maketitle
 
 \begin{abstract}
-The history of computer vision led us to believe that like us, Convolutional Neural Networks (CNNs) would recognize 
-objects mainly by their shapes. The paper we reproduced here introduces a novel hypothesis:
-modern state of the art CNNs are more biaised towards textures than shapes. 
-The autors verified their theory through multiple experiments,
-and were able then to train CNNs to better recognize shapes, and surpass the state of the art models on Imagenet classification.
+% The history of computer vision led us to believe that like us, Convolutional Neural Networks (CNNs) would recognize 
+% objects mainly by their shapes. The paper we reproduced here introduces a novel hypothesis:
+% modern state of the art CNNs are more biaised towards textures than shapes. 
+% The autors verified their theory through multiple experiments,
+% and were able then to train CNNs to better recognize shapes, and surpass the state of the art models on Imagenet classification.
+
+% NEW ABSTRACT VERSION
+The history of computer vision led us to believe that like humans, 
+Convolutional Neural Networks (CNNs) would recognize objects mainly by their shapes.
+Recent studies in the field however, have  suggested that CNNs rely more on image textures 
+rather than edges and shapes in order to perform object detection. 
+A paper published in November 2018, by \cite{geirhos2018imagenettrained}, explored the idea of texture biais
+and presented novels solutions in order to shift the trend towards a stronger shape biais for CNNs, similar to 
+how humans perceive things.
+The following report attempts to analyse the hypothesis proposed in the paper, 
+as well as offer a scopped reproduction of the experiments conducted by the authors, in a smaller environment, 
+in order to draw new conclusions and reinforce our understanding of the internals of CNNs.
 \end{abstract}
 
 \section{Introduction}
 
 % https://hackernoon.com/a-brief-history-of-computer-vision-and-convolutional-neural-networks-8fe8aacc79f3
 
-Modern Convolutional Neural Networks reach very high performances on complex computer vision tasks like
-Image classification and Image Segmentation
-These performances are comparable with human perception and they come from a long history of studies.
-These studies led us to believe that CNNs are shape-biased. \\  
+Modern Convolutional Neural Networks regularly reach very high performances on complex computer vision tasks 
+such as image classification and segmentation.
+These performances are reaching human levels in term of accuracy, and come from a long history of studies 
+on human and machine perception. As such, and reinforced with other experiments on the matter, 
+it is commonly believed that CNNs learn features from the shapes of objects during the training phase
+and use these for detection. \smallskip
+
 \noindent
-The first proof that edges are fundamental for vision came from a very influencal study of cognition:
-  “Receptive fields of single neurons in the cat’s striate cortex”
-described how biological neurons extracted features from images. 
-It showed that certain types of neurons were activated by edges. \\
+The first proof that edges are fundamental in computer vision came from a very influential study on cognition, 
+by \cite{hubel1959receptive}, who described how biological neurons extracted features from images,
+amongst which certain types of neurons were activated specifically by edges. \smallskip
+
+% WHATS THAT
+% It showed that certain types of neurons were activated by edges. \\
+% \noindent
+% The convolution of an image with a sobel filter is known to extract edges.
+% Other filters can extract other image features. However, the filters had to be handcrafted, and
+% the most significant features of an image had to be determined by a human.
+
+\textbf{TODO: REVIEW INTRODUCTION FROM HERE}
+
 \noindent
-The convolution of an image with a sobel filter is known to extract edges.
-Other filters can extract other image features. However, the filters had to be handcrafted, and
-the most significant features of an image had to be determined by a human.
-
-\includegraphics[width = 0.5\textwidth]{imgs/uniform}
-
-\includegraphics[width = 0.5\textwidth]{imgs/sin-in/loss}
-
 Another paper showed that vision was hierachical. Low-level features (simple shapes like lines)
 were combined to recognize high level features (like wheels, windows ...).
 
@@ -149,13 +165,14 @@ Our objective is to test these hypothesis with diverse experiments.
 
 \subsection{Dataset}
 
-We used Imagenette \cite{fastai2019} a subset of ImageNet dataset created 
-by fastai to do our experiments.
-This ensured that our results are comparable, and that the dataset is not too large.
+We used Imagenette \cite{fastai2019}, a subset of the Imagenet dataset created 
+by fastai to conduct our experiments.
+This ensured that our results would be comparable to the authors, 
+while keeping an acceptable size for the dataset given the time and material constraints.
 Imagenette contains 13394 images.
 Imagenette's train/test split is 70/30: 9469 images for the train and validation set, and 3925 images for the test set.
-It contains 10 easily classigied classes from Imagenet: 
-(tench, English springer, cassette player, chain saw, church, French horn, garbage truck, gas pump, golf ball, parachute)
+It contains 10 easily classified classes from Imagenet, namely
+tench, English springer, cassette player, chain saw, church, French horn, garbage truck, gas pump, golf ball, parachute)
 The classes are balanced with around 950 images in each one.
 
 This dataset is more easily classifiable than Imagenet in less time, which fits our purpose.
@@ -200,10 +217,11 @@ DATASETS
 % We then trained a ResNet-18 to classify the chosen images and visualize the results.
 % Figure 1 below shows the result of classification for a content image (a), texture image (b) and stylized image (c).
 
-The first experiment conducted by the authors was to visualize the texture biais 
-through image classification on a stylized image. 
-Their hypothesis was that the textured image would be classified as the texture representation, rather than 
-the underlying content using the shapes, which is contrary to popular belief. \\
+The first experiment conducted by the authors was to validate the texture biais 
+through image classification on handpicked stylized subsets. 
+Their hypothesis was that the re-texturized image would be classified as the texture representation, rather than 
+the underlying content using the shapes, which would be contrary to popular belief. \smallskip
+
 \noindent
 We've reproduced their experiment in figure 1, % TODO: ADD LINK ??
 using the picture of an English Springer as our content image (a), 
@@ -238,6 +256,10 @@ JOINTLY ON SIN IN AND FINETUNE
 \subsection{Noise resistance}
 
 EXPERIENCE ABOUDELOU
+
+\includegraphics[width = 0.45\textwidth]{imgs/uniform}
+
+\includegraphics[width = 0.45\textwidth]{imgs/sin-in/loss}
 
 \newpage
 \section{Approach analysis}
