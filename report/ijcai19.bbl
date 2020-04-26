@@ -12,6 +12,11 @@ Robert Geirhos, Patricia Rubisch, Claudio Michaelis, Matthias Bethge, Felix~A.
 \newblock Imagenet-trained cnns are biased towards texture; increasing shape
   bias improves accuracy and robustness, 2018.
 
+\bibitem[\protect\citeauthoryear{Hubel and Wiesel}{1959}]{hubel1959receptive}
+D.~H. Hubel and T.~N. Wiesel.
+\newblock Receptive fields of single neurones in the cat's striate cortex.
+\newblock page 574–591, 1959.
+
 \bibitem[\protect\citeauthoryear{Kriegeskorte}{2015}]{Kriegeskorte029876}
 Nikolaus Kriegeskorte.
 \newblock Deep neural networks: a new framework for modelling biological vision
