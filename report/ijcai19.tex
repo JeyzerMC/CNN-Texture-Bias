@@ -80,10 +80,11 @@ abderahmane.bouziane@polymtl.ca
 \maketitle
 
 \begin{abstract}
-The history of computer vision led us to believe that like us, CNNs recognize 
-objects mainly by their shapes. The paper we reproduce introduces a new hypothesis: modern
-CNNs are more texture biased than shape biased. The autors verified this hypothesis, and were
-able to train CNNs to better recognize shapes, and surpass the State of the Art on Imagenet classification.
+The history of computer vision led us to believe that like us, Convolutional Neural Networks (CNNs) would recognize 
+objects mainly by their shapes. The paper we reproduced here introduces a novel hypothesis:
+modern state of the art CNNs are more biaised towards textures than shapes. 
+The autors verified their theory through multiple experiments,
+and were able then to train CNNs to better recognize shapes, and surpass the state of the art models on Imagenet classification.
 \end{abstract}
 
 \section{Introduction}
@@ -142,17 +143,38 @@ Our objective is to test these hypothesis with diverse experiments.
 
 \section{Methodology}
 
-\subsubsection{Intuition}
+\subsection{Intuition}
 
-To begin with, we reproduced the first experiment of the paper. This experiment
-is represents the misconception we have about how CNNs learn.
 
-Figure Mehdi
+The first step of this analysis was to reproduce the original experiment of the paper with imagenette-160 
+and handpicked images and textures. 
+We then trained a ResNet-18 to classify the chosen images and visualize the results.
+Figure 1 below shows the result of classification for a content image (a), texture image (b) and stylized image (c).
 
-We can see that the pretrained CNN recognized the elephant with just its texture.
-More interestingly, it recognized it classified the cat shape with elephant texture as an elephant.
-The texture hypothesis is more likely to be true.
-Let's define more robust experiments to verify that.
+\begin{figure}[h]\centering
+  \includegraphics{imgs/dog}
+  \caption*{(a) Content image: TODO GIVE NUMBERS}
+\end{figure}
+
+\begin{figure}[h]\centering
+  \includegraphics{imgs/texture}
+  \caption*{(a) Texture image: TODO GIVE NUMBERS}
+\end{figure}
+
+\begin{figure}[h]\centering
+  \includegraphics{imgs/stylized}
+  \caption*{(a) Stylized image: TODO GIVE NUMBERS}
+\end{figure}
+
+% To begin with, we reproduced the first experiment of the paper. This experiment
+% is represents the misconception we have about how CNNs learn.
+
+% Figure Mehdi
+
+% We can see that the pretrained CNN recognized the elephant with just its texture.
+% More interestingly, it recognized it classified the cat shape with elephant texture as an elephant.
+% The texture hypothesis is more likely to be true.
+% Let's define more robust experiments to verify that.
 
 
 \subsection{Texture bias of CNNs}
