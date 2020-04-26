@@ -1,10 +1,5 @@
 \begin{thebibliography}{}
 
-\bibitem[\protect\citeauthoryear{FastAi}{2019}]{fastai2019}
-FastAi.
-\newblock Imagenette.
-\newblock \url{https://github.com/fastai/imagenette}, 2019.
-
 \bibitem[\protect\citeauthoryear{Geirhos \bgroup \em et al.\egroup
   }{2018}]{geirhos2018imagenettrained}
 Robert Geirhos, Patricia Rubisch, Claudio Michaelis, Matthias Bethge, Felix~A.
