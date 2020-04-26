@@ -95,13 +95,11 @@ Modern Convolutional Neural Networks reach very high performances on complex com
 Image classification and Image Segmentation
 These performances are comparable with human perception and they come from a long history of studies.
 These studies led us to believe that CNNs are shape-biased. \\  
-
 \noindent
 The first proof that edges are fundamental for vision came from a very influencal study of cognition:
   “Receptive fields of single neurons in the cat’s striate cortex”
 described how biological neurons extracted features from images. 
 It showed that certain types of neurons were activated by edges. \\
-
 \noindent
 The convolution of an image with a sobel filter is known to extract edges.
 Other filters can extract other image features. However, the filters had to be handcrafted, and
@@ -160,19 +158,24 @@ TODO
 
 TODO MAYBE ?
 
-
 \newpage
 \section{Experiments}
 
-\subsection{Texture biais intuition}
+INTRODUCTION OF THE SECTION HERE
 
+\subsection{Texture biais intuition}
 % The first experiment of this analysis was to reproduce the original experiment of the paper with imagenette-160 
 % and handpicked images and textures. 
 % We then trained a ResNet-18 to classify the chosen images and visualize the results.
 % Figure 1 below shows the result of classification for a content image (a), texture image (b) and stylized image (c).
 
 The first experiment conducted by the authors was to visualize the texture biais 
-through image classification on a stylized image. The intuition was that the textured image would be classified as 
+through image classification on a stylized image. 
+Their hypothesis was that the textured image would be classified as the texture representation, rather than 
+the underlying content using the shapes, which is contrary to popular belief. \\
+\noindent
+We've reproduced their experiment using the picture of a dog 
+
 
 \begin{figure}[h!]\centering
   \includegraphics{imgs/dog}
