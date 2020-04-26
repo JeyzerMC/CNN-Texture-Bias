@@ -4,6 +4,7 @@
 *.fdb_latexmk
 *.log
 *.out
-*.pdf
 *.synctex.gz
 *.bbl
+.vscode
+*.pdf
