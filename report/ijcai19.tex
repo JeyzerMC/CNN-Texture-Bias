@@ -149,11 +149,24 @@ Our objective is to test these hypothesis with diverse experiments.
 
 \subsection{Dataset}
 
-TODO
+We used Imagenette \cite{fastai2019} a subset of ImageNet dataset created 
+by fastai to do our experiments.
+This ensured that our results are comparable, and that the dataset is not too large.
+Imagenette contains 13394 images.
+Imagenette's train/test split is 70/30: 9469 images for the train and validation set, and 3925 images for the test set.
+It contains 10 easily classigied classes from Imagenet: 
+(tench, English springer, cassette player, chain saw, church, French horn, garbage truck, gas pump, golf ball, parachute)
+This dataset is more easily classifylible than Imagenet in less time, which fits our purpose.
+We used the '160px' version of the images, where the shortest size of the images are resized to that size, 
+with their aspect ratio maintained.
+963 for n01440764
+
 
 \subsection{Style Transfer}
 
-We applied style transfer on Imagenette dataset
+We applied style transfer on Imagenette dataset to replace the original texture 
+with a random texture. This procedure ensures that the images conserve their edges,
+but not their textures.
 
 
 \subsection{ResNet}
