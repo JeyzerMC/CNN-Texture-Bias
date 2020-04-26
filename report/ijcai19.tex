@@ -93,7 +93,7 @@ able to train CNNs to better recognize shapes, and surpass the State of the Art 
 Modern Convolutional Neural Networks reach very high performances on complex computer vision tasks like
 Image classification and Image Segmentation
 These performances are comparable with human perception and they come from a long history of studies.
-It is important to understand those studies t
+These studies led us to believe that CNNs are shape-biased.
 
 
 The first proof that edges are fundamental for vision came from a very influencal study of cognition:
@@ -142,78 +142,57 @@ Our objective is to test these hypothesis with diverse experiments.
 
 \section{Methodology}
 
+\subsubsection{Intuition}
+
 To begin with, we reproduced the first experiment of the paper. This experiment
 is represents the misconception we have about how CNNs learn.
 
+Figure Mehdi
 
 We can see that the pretrained CNN recognized the elephant with just its texture.
 More interestingly, it recognized it classified the cat shape with elephant texture as an elephant.
 The texture hypothesis is more likely to be true.
 Let's define more robust experiments to verify that.
 
+
+\subsection{Texture bias of CNNs}
+
+General explanation
+
+\subsubsection{IN to IN}
+expected results
+\subsubsection{SIN to IN}
+expected results
+
+\subsection{Dataset}
+
+Details on dataset creation
+
+\subsection{Resistance to noise}
+
+Experiences Abder
+Data generation
+
+\subsection{Training}
+
+Details of ResNet model
+Hyperparams
+Nb Epochs
+FineTuning method
+
 \section{Results}
+
+\subsection{Texture bias of CNNs}
+
+\subsection{Resistance to noise}
+
 
 \section{Discussion}
 
-\subsubsection{References}
+\subsection{Texture bias of CNNs}
 
-The references section is headed ``References'', printed in the same
-style as a section heading but without a number. A sample list of
-references is given at the end of these instructions. Use a consistent
-format for references. The reference list should not include unpublished
-work.
+\subsection{Resistance to noise}
 
-
-\section{Tables}
-
-Tables are considered illustrations containing data. Therefore, they should also appear floated to the top (preferably) or bottom of the page, and with the captions below them.
-
-\begin{table}
-\centering
-\begin{tabular}{lll}
-\hline
-Scenario  & $\delta$ & Runtime \\
-\hline
-Paris       & 0.1s  & 13.65ms     \\
-Paris       & 0.2s  & 0.01ms      \\
-New York    & 0.1s  & 92.50ms     \\
-Singapore   & 0.1s  & 33.33ms     \\
-Singapore   & 0.2s  & 23.01ms     \\
-\hline
-\end{tabular}
-\caption{Latex default table}
-\label{tab:plain}
-\end{table}
-
-\begin{table}
-\centering
-\begin{tabular}{lrr}
-\toprule
-Scenario  & $\delta$ (s) & Runtime (ms) \\
-\midrule
-Paris       & 0.1  & 13.65      \\
-            & 0.2  & 0.01       \\
-New York    & 0.1  & 92.50      \\
-Singapore   & 0.1  & 33.33      \\
-            & 0.2  & 23.01      \\
-\bottomrule
-\end{tabular}
-\caption{Booktabs table}
-\label{tab:booktabs}
-\end{table}
-
-
-\section*{Acknowledgments}
-
-The preparation of these instructions and the \LaTeX{} and Bib\TeX{}
-files that implement them was supported by Schlumberger Palo Alto
-Research, AT\&T Bell Laboratories, and Morgan Kaufmann Publishers.
-Preparation of the Microsoft Word file was supported by IJCAI.  An
-early version of this document was created by Shirley Jowell and Peter
-F. Patel-Schneider.  It was subsequently modified by Jennifer
-Ballentine and Thomas Dean, Bernhard Nebel, Daniel Pagenstecher,
-Kurt Steinkraus, Toby Walsh and Carles Sierra. The current version
-has been prepared by Marc Pujol-Gonzalez and Francisco Cruz-Mencia.
 
 \appendix
 
