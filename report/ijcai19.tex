@@ -164,9 +164,14 @@ TODO MAYBE ?
 \newpage
 \section{Experiments}
 
-INTRODUCTION OF THE SECTION HERE
+The authors of the original paper trained multiple models, 
+namely Resnet-50, BagNet-33, BagNet-17 and BagNet-9
 
-\subsection{Texture biais intuition}
+MODELS
+TEXTURES
+DATASETS
+
+\subsection{Texture biais hypothesis}
 % The first experiment of this analysis was to reproduce the original experiment of the paper with imagenette-160 
 % and handpicked images and textures. 
 % We then trained a ResNet-18 to classify the chosen images and visualize the results.
@@ -177,32 +182,39 @@ through image classification on a stylized image.
 Their hypothesis was that the textured image would be classified as the texture representation, rather than 
 the underlying content using the shapes, which is contrary to popular belief. \\
 \noindent
-We've reproduced their experiment using the picture of a dog 
+We've reproduced their experiment in figure 1, % TODO: ADD LINK ??
+using the picture of an English Springer as our content image (a), 
+a colorful parachute as our texture image (b),
+and a stylized version of the Springer (c) using AdaIN style transfer 
+(Huang \& Belongie, 2017) % TODO: ADD REFERENCE TO STYLE TRANSFER
+to introduce a texture-shape cue conflicts.
 
-
-\begin{figure}[h!]\centering
-  \includegraphics{imgs/dog}
-  \caption*{(a) Content image: TODO GIVE NUMBERS}
+\begin{figure}[h!]\center
+  \includegraphics[width=0.47\textwidth]{imgs/results-textures}
 \end{figure}
 
-\begin{figure}[h!]\centering
-  \includegraphics{imgs/texture}
-  \caption*{(b) Texture image: TODO GIVE NUMBERS}
-\end{figure}
+\noindent
+As we can see, we've obtained the same classification results as the authors, 
+where the stylized image was being recognized as the parachute texture
+rather than the underlying Springer content.
 
-\begin{figure}[h!]\centering
-  \includegraphics{imgs/stylized}
-  \caption*{(c) Stylized image: TODO GIVE NUMBERS}
-\end{figure}
+\subsection{Stylized-imagenette-160}
+
+In order to reduce the texture biais of ResNet-18, and introduce a more familiar shape biais, 
+the authors trained their model on a stylized version of Imagenet. 
+Due to time and material constraints, we've decided to use 
 
 \subsection{Overcoming the texture biais}
 
 EXPERIENCE IN SIN ETC
 
+\subsection{Shape-ResNet}
+
+JOINTLY ON SIN IN AND FINETUNE
+
 \subsection{Noise resistance}
 
 EXPERIENCE ABOUDELOU
-
 
 \newpage
 \section{Approach analysis}
