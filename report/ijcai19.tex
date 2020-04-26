@@ -88,7 +88,7 @@ abderahmane.bouziane@polymtl.ca
 
 \section{Introduction}
 
-https://hackernoon.com/a-brief-history-of-computer-vision-and-convolutional-neural-networks-8fe8aacc79f3
+% https://hackernoon.com/a-brief-history-of-computer-vision-and-convolutional-neural-networks-8fe8aacc79f3
 
 Modern Convolutional Neural Networks reach very high performances on complex computer vision tasks such as
 Image classification, Image Segmentation \dots
@@ -110,21 +110,35 @@ The famous Neocognition paper was the implementation of the idea of hierachical 
 This multilayered neural network included convolutional layers with wheighted receptive fields (filters).
 It was the first deep neural network.
 
-The first modern convnet was introduce by
--  LeNet \cite{Lecun98gradient-basedlearning}
+The first modern convnet was LeNet \cite{Lecun98gradient-basedlearning}
 It used backpropgation to automatically learn the filter values to extract meaningful features in images hierachically.
+All the modern ConvNets are inspired from this network.
 
-
-State of the art for Neural Networks
-ResNet
-Mask-RCNN etc
 ConvNet were considered like a black box for a long time.
 This is why efforts were made to analyze the internals of these networks.
-One one hand, the shape hypothesis
 
-One the other hand, the texture hypothesis.
+The shape hypothesis is that "High-level units appear to learn
+representations of shapes occurring in natural images” \cite{Kriegeskorte029876}
+This hypothesis is widespread in the comunity, and
+it is understandable given the history of computer vision.
+There are a lot of experiments comparing human vision with computer vision.
+X states that "implicitly learn representations of shape
+ that reflect human shape perception".
+Y said that "that  state-of-the-artone  shot  learning  models  trained  on  ImageNetexhibit  a  similar  bias  to  that  observed  in  hu-mans:  
+they prefer to categorize objects according  to  shape  rather  than  color" \cite{ritter2017cognitive}
+
+However, several studies raise doubts about this hypothesis.
+According to X, CNNs are able to classify texturised images even if their shape structure is destraoyed.
+Moreover, Y showed that CNNs with constrained receptive field sizes can reach competitive accuracies on ImageNet.
+It is worth noticing that small receptive fields cannot capture the overal shape of an image.
+These results have led the authors of the paper we reproduce \cite{geirhos2018imagenettrained} 
+to emit a new hypothesis: the texture hypothesis where "in contrast to the
+common assumption, object textures are more important than global object shapes for CNN object
+recognition".
 
 Our objective is to test these hypothesis with diverse experiments.
+
+\section{Methodology}
 
 To begin with, we reproduced the first experiment of the paper. This experiment
 is represents the misconception we have about how CNNs learn.
@@ -134,9 +148,6 @@ We can see that the pretrained CNN recognized the elephant with just its texture
 More interestingly, it recognized it classified the cat shape with elephant texture as an elephant.
 The texture hypothesis is more likely to be true.
 Let's define more robust experiments to verify that.
-
-\section{Methodology}
-
 
 \section{Results}
 
