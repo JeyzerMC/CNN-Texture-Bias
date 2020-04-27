@@ -132,8 +132,9 @@ Another paper showed that vision was hierachical. Low-level features, such as li
 were combined together to recognize high level concepts, like wheels, windows, etc. 
 The famous Neocognition paper \cite{neocognitron} was the implementation of the idea of hierachical vision.
 This multilayered neural network included convolutional layers with wheighted receptive fields (filters).
-It was the first deep neural network.
+It was the first deep neural network. \smallskip
 
+\noindent
 The first modern convnet was LeNet \cite{Lecun98gradient-basedlearning}
 It used backpropgation to automatically learn the filter values to extract meaningful features in images hierachically.
 All the modern ConvNets are inspired from this network.
@@ -209,8 +210,10 @@ This ensured that the texture of a stylized image had no correlation with its or
 
 \noindent
 We used the implementation of AdaIN-style \cite{huang2017arbitrary} made by \cite{stylizeddatasets2019}.
-
-\includegraphics[width=0.45\textwidth]{imgs/adain_architecture}
+\begin{figure}[h!]\center
+  \includegraphics[width=0.45\textwidth]{imgs/adain_architecture}
+  \caption{AdaIn style transfer network.}
+\end{figure}
 
 AdaIN-style is the first real-time style transfer algorithm than can transfer arbitrary new styles.
 That means that we can stylize an image with any texture image we want.
