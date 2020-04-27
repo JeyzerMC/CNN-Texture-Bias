@@ -352,7 +352,7 @@ We defined the max learning rate at 1e-4.
 
 \subsection{Robustness of shape-based representations}
 
-We reproduce the 4 experiments of the paper to prove the robustness of a shape-biased CNN
+We reproduce the 4 experiments of the original paper to prove the robustness of a shape-biased CNN
 (the CNN trained on SIN),
 and show the fragility of the texture biased CNN (the CNN trained on IN). 
 
@@ -390,7 +390,7 @@ the model is texture biased, and the SIN dataset is specifically designed to pro
 \end{figure}
 
 \subsubsection{SIN \texorpdfstring{\textrightarrow} .SIN}
-This training scheme yields fairly good results. This shows that the model is capable to learn
+This training scheme yields fairly good results (Fig. \ref{cm_sin-sin}). This shows that the model is capable to learn
 and generalize on the stylized dataset.
 
 \begin{figure}[h!]
@@ -401,7 +401,7 @@ and generalize on the stylized dataset.
 
 \subsubsection{SIN \texorpdfstring{\textrightarrow} .IN}
 
-This training scheme yields inferior results than IN \texorpdfstring{\textrightarrow} IIN, however
+This training scheme yields superior results (Fig. \ref{cm_sin-in}) than IN \texorpdfstring{\textrightarrow} .SIN (Fig. \ref{cm_in-sin}), however
 there are much better than IN \texorpdfstring{\textrightarrow} .SIN.
 This demonstrates that a shape-biased model generalizes better than texture biased models.
 
