@@ -185,62 +185,69 @@ while keeping an acceptable size for the dataset given the time and material con
 Imagenette contains 13394 images.
 Imagenette's train/test split is 70/30: 9469 images for the train and validation set, and 3925 images for the test set.
 It contains 10 easily classifiable classes from Imagenet, namely
-\textit{tench, English springer, cassette player, chain saw, church, French horn, garbage truck, gas pump, golf ball, parachute}.
-The classes are balanced with around 950 images in each one.
-
+\textit{tench, English springer, cassette player, chain saw, church, 
+French horn, garbage truck, gas pump, golf ball, parachute}.
+The classes are balanced with around 950 images in each one. \smallskip \par
+\vspace{-0.3cm}
+\noindent
 This dataset is more easily classifiable than Imagenet in less time, which fits our purpose.
 We used the '160px' version of the images, where the shortest size of the images are resized to that size, 
 with their aspect ratio maintained.
-
 
 \subsection{Style Transfer}
 
 This procedure ensures that the images conserve their edges, but not their textures.
 In order to destroy all the texture information of an image without its edges, we used style transfer like in
 the original paper.
-However, we generated our own Stylized-Dataset. \smallskip
+However, we generated our own Stylized-Dataset. \medskip \par
 
 \noindent
 The image for which you want to change the texture, but keep the edges is called the \textbf{content image}.
 The image were the the texture is extracted is called the \textbf{texture image}.
-The image created by the style transfer is called the \textbf{stylized image}. \smallskip
+The image created by the style transfer is called the \textbf{stylized image}. \medskip \par
 
 \noindent
 We applied style transfer on Imagenette to replace the original texture of the object (dog's fur for example) 
 with a random texture (a parachute's fabric and color) 
-from sampled from the Describable Texture Dataset \cite{cimpoi14describing}. \smallskip
+from sampled from the Describable Texture Dataset \cite{cimpoi14describing}. \medskip \par
 
 \noindent
 Our first aproach was to use a random image from the Texture Dataset to stylize Imagenette. However, 
-the edges of the images were sometimes destroyed, and were not identifiable by humans. \smallskip
+the edges of the images were sometimes destroyed, and were not identifiable by humans. \medskip \par
 
 \noindent
 To avoid poor quality images, we handpicked 11 texture images that generated good quality stylized images.
 Each time an Imagenette image was to be stylized, we picked a texture image randomly from our 11 textures.
-This ensured that the texture of a stylized image had no correlation with its original class. \smallskip
+This ensured that the texture of a stylized image had no correlation with its original class. \medskip \par
 
 \noindent
-We used the implementation of AdaIN-style \cite{huang2017arbitrary} made by \cite{stylizeddatasets2019}.
-\begin{figure}[h!]\center
-  \includegraphics[width=0.45\textwidth]{imgs/adain_architecture}
-  \caption{AdaIn style transfer network.}
-\end{figure}
+We used the implementation of AdaIN-style \cite{huang2017arbitrary} made by \cite{stylizeddatasets2019}
+for the style transfer. The architecture of AdaIn can be seen on Fig. \ref{adain-archi}.
+\medskip \par
 
+\noindent
 AdaIN-style is the first real-time style transfer algorithm than can transfer arbitrary new styles.
 That means that we can stylize an image with any texture image we want.
 This pretrained architecture uses a VGG-19 network to encode the content and style images.
 An AdaIN layer is then used to perform style transfer in the feature space.   
 A Decoder then decodes the AdaIN output to image space.
 
+\begin{figure}[h!]\center
+  \includegraphics[width=0.45\textwidth]{imgs/adain_architecture}
+  \caption{AdaIn style transfer network.}
+  \label{adain-archi}
+\end{figure}
+
+\newpage
 \subsection{Metrics}
 
-We decided to only use the multi-class Accuracy, as our class are balanced, and not too numerous.
+We decided to only use the multi-class Accuracy, as our class are balanced, and not too numerous. \medskip \par
 
-$ Accuracy = \frac{TP + TN}{TP + TN + FP + FN}  $ \medskip
+$ Accuracy = \frac{TP + TN}{TP + TN + FP + FN}  $ \medskip \par
 
 \noindent
 where TP is the True Positives, TN is True Negatives, FP is the sum of the False Positives
-and FN is the sum of False Negatives.
+and FN is the sum of False Negatives. \medskip \par
 
 \noindent
 Top-k accuracy is a useful metric when there is a lot of classes to predict. Our dataset only
@@ -280,10 +287,9 @@ the underlying content using the shapes, which would be contrary to popular beli
 
 \noindent
 We've reproduced their experiment using the picture of an English Springer as our content image (a), 
-a colorful parachute as our texture image (b),
-and a stylized version of the Springer (c) using AdaIN style transfer 
+and a stylized version of the Springer (b) using AdaIN style transfer 
 (Huang \& Belongie, 2017) % TODO: ADD REFERENCE TO STYLE TRANSFER
-to introduce a texture-shape cue conflicts. \medskip \par
+to introduce a texture-shape cue conflicts. The texture used is of a parachute. \medskip \par
 
 \noindent
 The classification results after training the resnet-18 on the imagenette-160 dataset 
@@ -564,21 +570,21 @@ As mentionned in the first section, we've used a subset of
 the same dataset the authors used in their experiment. 
 Indeed, we didn't have much time to find another image classification dataset that fitted our needs.
 Many of the datasets we found online were poorly anotated, or the images
-were too large. \smallskip
+were too large. \medskip \par 
 
 \noindent
 The original Imagenet dataset had too many classes and a large number of images (over 14M), 
 which would take way too long to train. 
-We also did not have the physical storage capacities for this dataset. \smallskip
+We also did not have the physical storage capacities for this dataset. \medskip \par 
 
 \noindent
 On the other hand, CIFAR-10's images quality was too poor 
-to obtain nice results on our style transfer procedure. \smallskip
+to obtain nice results on our style transfer procedure. \medskip \par 
 
 \noindent
 We've also experimented quickly with the Natural Images dataset \cite{natural-images}, 
 but promising results that were obtained in parallele using the smaller version of imagenette, 
-imagenette-160, led us to focus on this dataset for the rest of our experiments. \smallskip
+imagenette-160, led us to focus on this dataset for the rest of our experiments. \medskip \par 
 
 \noindent
 It would be interesting, as a next step, to test this approach on the Natural Images dataset,
@@ -595,7 +601,9 @@ in Imagenette were handpicked to be easily classified, and that there were less
 classes than Imagenet.
 Our results fluacted a bit between different training. For example, finetuning does not seem to be necessary 
 in our study. However, when the performance of SIN + IN is sometimes lower than 0.9. In this scenario, finetuning
-always surpassed IN \texorpdfstring{\textrightarrow} .IN.
+always surpassed IN \texorpdfstring{\textrightarrow} .IN. \medskip \par 
+
+\noindent
 To correct this, we could have calculated our accuracy on the average of five runs, like the auhors of Imagenette \cite{fastai2019}
 suggested.
 
@@ -608,8 +616,9 @@ steps were clearly explained.
 
 \subsection{Ideas for future studies}
 
-Testing this robustness in related areas were shape bias (like image segmentation) 
-is more important than image classification could be interesting.
+Testing this robustness in related areas where shape bias
+is more important than image classification, like for example in image segmentation,
+could prove to be quite interesting.
 
 \section{Conclusion}
 
