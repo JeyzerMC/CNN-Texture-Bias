@@ -269,7 +269,13 @@ rather than the underlying Springer content.
 We reproduce the 4 experiments of the paper to prove the robustness of a shape-biased CNN.
 Here, SIN and IN represent the Stylized-Imagenette the Imagenette dataset respectively.
 
-INSERER TABLEAU
+\begin{table}[]
+  \begin{tabular}{|l|l|l|l|l|}
+  \hline
+  Architecture & IN\_IN & SIN\_SIN & IN\_SIN & SIN\_IN \\ \hline
+  ResNet-18    & 0.9    & 0.8      & 0.3     & 0.6     \\ \hline
+  \end{tabular}
+  \end{table}
 
 \subsubsection{IN \texorpdfstring{\textrightarrow} IN}
 A model trained on IN and tested on IN is the usual training scheme used in the literature.
@@ -304,7 +310,7 @@ EXPERIENCE ABOUDELOU
 
 \includegraphics[width = 0.45\textwidth]{imgs/uniform}
 
-\includegraphics[width = 0.45\textwidth]{imgs/sin-in/loss}
+\includegraphics[width = 0.45\textwidth]{imgs/sin/loss.eps}
 
 \newpage
 \section{Approach analysis}
