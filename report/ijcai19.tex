@@ -237,20 +237,7 @@ TODO MAYBE ?
 \newpage
 \section{Experiments}
 
-The authors of the original paper trained multiple models, 
-namely Resnet-50, BagNet-33, BagNet-17 and BagNet-9
-
-MODELS
-TEXTURES
-DATASETS
-
-
-
 \subsection{Texture biais hypothesis}
-% The first experiment of this analysis was to reproduce the original experiment of the paper with imagenette-160 
-% and handpicked images and textures. 
-% We then trained a ResNet-18 to classify the chosen images and visualize the results.
-% Figure 1 below shows the result of classification for a content image (a), texture image (b) and stylized image (c).
 
 The first experiment conducted by the authors was to validate the texture biais 
 through image classification on handpicked stylized subsets. 
@@ -285,7 +272,6 @@ As expected, and although the results are a bit less accurate than on the origin
 we get the correct class prediction for the stylized image, suggesting that our CNN recognized the object
 from its shape this time around, having no texture clue to learn from.
 
-
 \textbf{TODO: FINISH FIGURE 2 AND PUT HERE}
 
 \begin{figure}[h!]\center
@@ -293,6 +279,12 @@ from its shape this time around, having no texture clue to learn from.
   \caption{Classification results with stylized imagenette-160.}
   \label{fig:stylized-dog-parachute}
 \end{figure}
+
+\noindent
+The results of this experiment are also available in the dog-parachute notebook, 
+available on the github repository, under the section Test-Visualisation.
+
+\textbf{TODO: ADD LINK TO GITHUB EXPERIMENT FOR ABOVE.}
 
 \subsection{Training Procedure}
 
