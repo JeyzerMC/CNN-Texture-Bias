@@ -23,6 +23,8 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage{epstopdf}
+\usepackage{makecell}
+\usepackage{float}
 \urlstyle{same}
 
 % the following package is optional:
@@ -267,41 +269,44 @@ rather than the underlying Springer content.
 \subsection{Robustness of shape-based representations}
 
 We reproduce the 4 experiments of the paper to prove the robustness of a shape-biased CNN.
-Here, SIN and IN represent the Stylized-Imagenette the Imagenette dataset respectively.
+Here, SIN and IN represent Stylized-Imagenette and Imagenette datasets respectively.
 
-\begin{table}[]
-  \begin{tabular}{|l|l|l|l|l|}
-  \hline
+\begin{table}[h!]
+  \begin{tabular}{lllll}
+  \Xhline{2\arrayrulewidth}
   Architecture & IN\_IN & SIN\_SIN & IN\_SIN & SIN\_IN \\ \hline
-  ResNet-18    & 0.9    & 0.8      & 0.3     & 0.6     \\ \hline
+  ResNet-18    & 0.9    & 0.8      & 0.3     & 0.6     \\ \Xhline{2\arrayrulewidth}
   \end{tabular}
-  \end{table}
+  \caption{Table X: Accuracy of ResNet18 model on different tests}
 
-\subsubsection{IN \texorpdfstring{\textrightarrow} _IN}
+\end{table}
+
+
+\subsubsection{IN \texorpdfstring{\textrightarrow} .IN}
 A model trained on IN and tested on IN is the usual training scheme used in the literature.
 It yields competitive results, as we already now.
 
 
-\subsubsection{IN \texorpdfstring{\textrightarrow} _SIN}
+\subsubsection{IN \texorpdfstring{\textrightarrow} .SIN}
 The original paper trained a model on IN and tested it on SIN which yielded poor results as 
 the model is texture biased, and the SIN dataset is specifically designed to promote shape biased models.
 
-\subsubsection{SIN \texorpdfstring{\textrightarrow} _SIN}
+\subsubsection{SIN \texorpdfstring{\textrightarrow} .SIN}
 This training scheme yields fairly good results. This shows that the model is capable to learn
-and generalize on the stylised dataset.
+and generalize on the stylized dataset.
 
-\subsubsection{SIN \texorpdfstring{\textrightarrow} _IN}
+\subsubsection{SIN \texorpdfstring{\textrightarrow} .IN}
 
 This training scheme yields inferior results than IN \texorpdfstring{\textrightarrow} IIN, however
-there are much better than IN \texorpdfstring{\textrightarrow} _SIN. 
+there are much better than IN \texorpdfstring{\textrightarrow} .SIN. 
 
 This demonstrates that a shape-biased model generalizes better than texture biased models.
 
 \subsection{Shape-ResNet}
 
-\subsubsection{SIN + IN \texorpdfstring{\textrightarrow} _IN}
+\subsubsection{SIN + IN \texorpdfstring{\textrightarrow} .IN}
 
-\subsubsection{SIN + IN + finetune(IN) \texorpdfstring{\textrightarrow} _IN}
+\subsubsection{SIN + IN + finetune(IN) \texorpdfstring{\textrightarrow} .IN}
 
 
 \subsection{Noise resistance}
