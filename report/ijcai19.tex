@@ -331,6 +331,9 @@ We fixed the maximum learning rate at 1e-2 by looking at the learning rate space
   \label{lr_finder}
 \end{figure}
 
+\textit{Validation set}: We do a random 80/20 split of the train set to generate the 
+validation set.
+
 \subsubsection{Experiment-specific parameters}
 We used Early Stopping for the FineTuning experiment only, because this model was more prone to overfitting.
 As we can see in Fig. \ref{lr_finetune} , the maximum learning rate has to be much lower than previous experiments 
@@ -433,6 +436,16 @@ and does not make the model overfit.
   \label{cm_sinin-in}
 \end{figure}
 
+In the Fig. \ref{loss_sinin}, we observe that the validation loss is much higher than the training
+loss. The model overfits a lot on the training data.
+
+
+\begin{figure}[h!]
+  \includegraphics[width = 0.45\textwidth]{imgs/sinin/loss.eps}
+  \caption{Loss of training on the SIN + IN \texorpdfstring{\textrightarrow} .IN experiment}
+  \label{loss_sinin}
+\end{figure}
+
 \subsubsection{SIN + IN + finetune(IN) \texorpdfstring{\textrightarrow} .IN}
 
 This method yields the best results (Fig. \ref{cm_sinin-in-finetune}) The finetuning only occurs
@@ -449,9 +462,11 @@ Hence, the model does not overfit on textures, but is better to better classify 
 
 We can see on the Fig. \ref{loss_finetune} that the train loss is fluctuating a lot even with a small
 learning rate. However, the validation loss is stable and slowly decreasing.
-The validation loss is lower than the training loss, which is a sign of underfitting. This is what we want:
+The validation loss is slightly lower than the training loss, which is a sign of underfitting. This is what we want:
 the feature extraction is more shape biased than texture biased, and the model is not overfitting on the texture like
 before.
+We also observe that both losses are both really low compared to the previous experiments. 
+We can conclude that finetuning had a positive effect on the generalization power of the model.
 
 \begin{figure}[h!]
   \includegraphics[width = 0.45\textwidth]{imgs/sinin/finetune/loss.eps}
