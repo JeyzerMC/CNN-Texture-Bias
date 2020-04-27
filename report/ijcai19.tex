@@ -131,28 +131,35 @@ amongst which certain types of neurons were activated specifically by edges. \sm
 Another paper showed that vision was hierachical. Low-level features, such as lines,
 were combined together to recognize high level concepts, like wheels, windows, etc. 
 The famous Neocognition paper \cite{neocognitron} was the implementation of the idea of hierachical vision.
-This multilayered neural network included convolutional layers with wheighted receptive fields (filters).
-It was the first deep neural network. \smallskip
+The multilayered neural network proposed in the paper included convolutional layers with wheighted receptive fields (filters).
+It was the first known deep neural network. \smallskip
 
 \noindent
-The first modern convnet was LeNet \cite{Lecun98gradient-basedlearning}
-It used backpropgation to automatically learn the filter values to extract meaningful features in images hierachically.
-All the modern ConvNets are inspired from this network.
+However, the first modern convnet was LeNet \cite{Lecun98gradient-basedlearning}.
+This CNN used backpropgation to automatically learn the filter values to extract meaningful 
+features in images hierachically.
+Nowadays, all the recent convolutional neural networks are inspired from this network. \smallskip
 
-ConvNet were considered like a black box for a long time.
-This is why efforts were made to analyze the internals of these networks.
+\noindent
+ConvNet were considered like a black box for a long time, 
+hence why extensive efforts were conducted during recent years in order 
+to analyze the internals of these networks. \smallskip
 
-The shape hypothesis is that "High-level units appear to learn
-representations of shapes occurring in natural images” \cite{Kriegeskorte029876}
-This hypothesis is widespread in the comunity, and
-it is understandable given the history of computer vision.
+\noindent
+The shape hypothesis that emerged from early experiments consists in
+"High-level units appear to learn representations of shapes occurring in natural images” 
+\cite{Kriegeskorte029876}. This theory quickly became widespread in the community, and
+is understandable given the history of computer vision. 
+
+\textbf{TODO: CORRECT FROM HERE}
+
 There are a lot of experiments comparing human vision with computer vision.
 X states that "implicitly learn representations of shape
  that reflect human shape perception".
 Y said that "that  state-of-the-artone  shot  learning  models  trained  on  ImageNetexhibit  a  similar  bias  to  that  observed  in  hu-mans:  
 they prefer to categorize objects according  to  shape  rather  than  color" \cite{ritter2017cognitive}
 
-However, several studies raise doubts about this hypothesis.
+However, several studies raised doubts about this hypothesis.
 According to X, CNNs are able to classify texturised images even if their shape structure is destraoyed.
 Moreover, Y showed that CNNs with constrained receptive field sizes can reach competitive accuracies on ImageNet.
 It is worth noticing that small receptive fields cannot capture the overal shape of an image.
