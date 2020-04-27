@@ -344,7 +344,7 @@ We fixed the maximum learning rate at 1e-2 by looking at the learning rate space
 validation set.
 
 \subsubsection{Experiment-specific parameters}
-We used Early Stopping for the FineTuning experiment only, because this model was more prone to overfitting.
+We used an Early Stopping callback for the FineTuning experiment only, because this model was more prone to overfitting.
 As we can see in Fig. \ref{lr_finetune} , the maximum learning rate has to be much lower than previous experiments 
 We defined the max learning rate at 1e-4.
 
@@ -367,7 +367,7 @@ and show the fragility of the texture biased CNN (the CNN trained on IN).
   Architecture & IN\texorpdfstring{\textrightarrow} .IN & SIN\texorpdfstring{\textrightarrow} .SIN & IN\texorpdfstring{\textrightarrow} .SIN & SIN\texorpdfstring{\textrightarrow}.IN \\ \hline
   ResNet-18    & \textbf{0.963}     & 0.908      & 0.313     & 0.624     \\ \Xhline{2\arrayrulewidth}
   \end{tabular}
-  \caption{Accuracy of ResNet18 model on different tests}
+  \caption{Accuracies of ResNet18 model on different tests}
 \end{table}
 
 
@@ -396,7 +396,7 @@ the model is texture biased, and the SIN dataset is specifically designed to pro
 
 \subsubsection{SIN \texorpdfstring{\textrightarrow} .SIN}
 This training scheme yields fairly good results (Fig. \ref{cm_sin-sin}). This shows that the model is capable to learn
-and generalize on the stylized dataset.
+meaningful features on the stylized dataset.
 
 \begin{figure}[h!]
   \includegraphics[width = 0.45\textwidth]{imgs/sin/sin-sin/sin-sin_confusion_matrix_0.908.eps}
@@ -420,7 +420,7 @@ This demonstrates that a shape-biased model generalizes better than texture bias
 
 Now that we demonstrated the excellent generalization capabilites of shape biased models,
 our goal is to surpass the performance of the IN \texorpdfstring{\textrightarrow} .IN model.
-\textbf{All the following models are evaluated on the IN dataset.}
+\textbf{All the following models are evaluated on the IN test set.}
 
 \begin{table}[h!]
   \begin{tabular}{lllll}
@@ -428,7 +428,7 @@ our goal is to surpass the performance of the IN \texorpdfstring{\textrightarrow
   Architecture & IN & SIN+SIN  & SIN + IN + finetune(IN) \\ \hline
   ResNet-18    & 0.963    & 0.973   & \textbf{0.974}    \\ \Xhline{2\arrayrulewidth}
   \end{tabular}
-  \caption{Accuracy of ResNet18 model on IN test set}
+  \caption{Accuracies of ResNet18 model on IN test set}
 \end{table}
 
 
@@ -495,60 +495,66 @@ This makes sense since a uniform noise has a much worse effect on texture than o
 \begin{figure}[h!]
 \centering
 \includegraphics[width = 0.25\textwidth]{imgs/image_uniform}
-\caption{uniform noise}
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width = 0.25\textwidth]{imgs/image_high}
-\caption{high pass}
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width = 0.25\textwidth]{imgs/image_low}
-\caption{low pass}
-
-\end{figure}
-
-\subsubsection{experiment}
-
-We decided to reproduce this experiment with our own data.
-All of the distorted data sets are created form the regular imagenette data set. We applied the distortions at different scale gradually increasing the effect on the images.
-
-We then compared the results of our three trained models against those different noise levels.
-The models were the regular resnet trained on imagenette (IN), a resnet trained on a stylised version of imagenette (SIN) and one trained on a combination of this data (SIN+IN).
-Each model was given the same test set on which a gradually increasing noise was applied and an accuracy was computed.
-
-The different level of noise were chosen arbitrarily to create different enough distortions. The original values and algorithms used in the paper were not available.
-
-\subsubsection{results}
-
-In all of the test we conducted, the SIN model always start off worse. This is to be expected because it was trained on stylised images and the test set for the distorted images is based on regular images. The IN and SIN+IN model start at about the same accuracy.
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width = 0.45\textwidth]{imgs/uniform}
 \caption{Uniform noise}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
+\includegraphics[width = 0.25\textwidth]{imgs/image_high}
+\caption{High pass}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width = 0.25\textwidth]{imgs/image_low}
+\caption{Low pass}
+
+\end{figure}
+
+\subsubsection{Experiment}
+
+We decided to reproduce this experiment with our own data.
+All of the distorted data sets are created form the regular Imagenette data set. We applied the distortions at different scale gradually increasing the effect on the images.
+
+We then compared the results of our three trained models against those different noise levels.
+The models were the regular resnet trained on imagenette (IN), a resnet trained on a stylised version of imagenette (SIN) and one trained on a combination of this data (SIN+IN).
+Each model was given the same test set on which a gradually increasing noise was applied and an accuracy was computed.
+
+The different levels of noise were chosen arbitrarily to create different enough distortions. The original values and algorithms used in the paper were not available.
+
+\subsubsection{Results}
+
+In all of the test we conducted, the SIN model always start off worse. This is to be expected because it was trained on stylized images 
+and the test set for the distorted images is based on regular images. The IN and SIN+IN model start at about the same accuracy.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width = 0.45\textwidth]{imgs/uniform}
+\caption{Uniform noise}
+\label{uniform_noise}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
 \includegraphics[width = 0.45\textwidth]{imgs/high_pass}
-\caption{High noise}
+\caption{High pass}
+\label{high_pass}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width = 0.45\textwidth]{imgs/low_pass}
 \caption{Low pass}
+\label{low_pass}
 \end{figure}
 
 The figures clearly show the shape biased models have a better resistance to noise the regular model.
 
 We were surprised by the results for two reasons.
 First, the SIN model started off at a worse accuracy, so we were expecting to compare the resistance to distortions as a relative drop from the original accuracy but it managed to have a better absolute accuracy than the regular model.
-Secondly, we were expecting the SIN model to under perform in the low pass area, but it managed to be better than the IN model. This goes against the results of the original paper and against common sense. It is possible the levels of blur applied were either too strong or not enough
+Secondly, we were expecting the SIN model to under perform in the low pass area (Fig. \ref{low_pass}), but it managed to be better than the IN model. 
+This goes against the results of the original paper and against common sense. 
+It is possible the levels of blur applied were too strong for the IN model to detect any texture.
 
 \section{Approach analysis}
 
