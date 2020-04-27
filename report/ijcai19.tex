@@ -83,13 +83,6 @@ abderahmane.bouziane@polymtl.ca
 \maketitle
 
 \begin{abstract}
-% The history of computer vision led us to believe that like us, Convolutional Neural Networks (CNNs) would recognize 
-% objects mainly by their shapes. The paper we reproduced here introduces a novel hypothesis:
-% modern state of the art CNNs are more biaised towards textures than shapes. 
-% The autors verified their theory through multiple experiments,
-% and were able then to train CNNs to better recognize shapes, and surpass the state of the art models on Imagenet classification.
-
-% NEW ABSTRACT VERSION
 The history of computer vision led us to believe that like humans, 
 Convolutional Neural Networks (CNNs) would recognize objects mainly by their shapes.
 Recent studies in the field however, have  suggested that CNNs rely more on image textures 
@@ -139,7 +132,7 @@ It was the first known deep neural network. \medskip \par
 
 \noindent
 However, the first modern convnet was LeNet \cite{Lecun98gradient-basedlearning}.
-This CNN used backpropgation to automatically learn the filter values to extract meaningful 
+This CNN used backpropagation to automatically learn the filter values to extract meaningful 
 features in images hierachically.
 Nowadays, all the recent convolutional neural networks are inspired from this network. \medskip \par
 
@@ -178,7 +171,7 @@ recognition". \medskip \par
 \bigskip
 
 Our objective in this report is to submit those hypothesis to a test through diverse experiments 
-and validate in our environment the results obtained by the original authors.
+and validate in our own environment the results obtained by the original authors.
 
 \newpage
 \section{Methodology}
@@ -271,8 +264,8 @@ For example, the nomenclature IN \texorpdfstring{\textrightarrow} .IN signifies 
 model was trained on IN and tested on IN.
 IN and SIN have the same image ids for their testing set, only the stylization changes.
 
-\subsection{Texture biais hypothesis}
-The first experiment conducted by the authors was to validate the texture biais 
+\subsection{Texture bias hypothesis}
+The first experiment conducted by the authors was to validate the texture bias 
 through image classification on handpicked stylized subsets. 
 Their hypothesis was that the re-texturized image would be classified as the texture representation, rather than 
 the underlying content using the shapes, which would be contrary to popular belief. \smallskip
@@ -289,7 +282,7 @@ The classification results after training the resnet-18 on the imagenette-160 da
 can be seen on figure \ref{dog-parachute}.
 We've obtained probabities in line with what was suggested by the authors, 
 where the stylized image was recognized as a parachute, 
-due to the texture biais, rather than an English Springer.
+due to the texture bias, rather than an English Springer.
 
 \begin{figure}[h!]\center
   \includegraphics[width=0.47\textwidth]{imgs/results-textures}
