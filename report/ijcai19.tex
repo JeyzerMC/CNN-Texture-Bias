@@ -277,31 +277,31 @@ Here, SIN and IN represent the Stylized-Imagenette the Imagenette dataset respec
   \end{tabular}
   \end{table}
 
-\subsubsection{IN \texorpdfstring{\textrightarrow} IIN}
+\subsubsection{IN \texorpdfstring{\textrightarrow} _IN}
 A model trained on IN and tested on IN is the usual training scheme used in the literature.
 It yields competitive results, as we already now.
 
 
-\subsubsection{IN \texorpdfstring{\textrightarrow} SSIN}
+\subsubsection{IN \texorpdfstring{\textrightarrow} _SIN}
 The original paper trained a model on IN and tested it on SIN which yielded poor results as 
 the model is texture biased, and the SIN dataset is specifically designed to promote shape biased models.
 
-\subsubsection{SIN \texorpdfstring{\textrightarrow} SSIN}
+\subsubsection{SIN \texorpdfstring{\textrightarrow} _SIN}
 This training scheme yields fairly good results. This shows that the model is capable to learn
 and generalize on the stylised dataset.
 
-\subsubsection{SIN \texorpdfstring{\textrightarrow} IIN}
+\subsubsection{SIN \texorpdfstring{\textrightarrow} _IN}
 
 This training scheme yields inferior results than IN \texorpdfstring{\textrightarrow} IIN, however
-there are much better than IN \texorpdfstring{\textrightarrow} SSIN. 
+there are much better than IN \texorpdfstring{\textrightarrow} _SIN. 
 
 This demonstrates that a shape-biased model generalizes better than texture biased models.
 
 \subsection{Shape-ResNet}
 
-\subsubsection{SIN + IN \texorpdfstring{\textrightarrow} IIN}
+\subsubsection{SIN + IN \texorpdfstring{\textrightarrow} _IN}
 
-\subsubsection{SIN + IN + finetune(IN) \texorpdfstring{\textrightarrow} IIN}
+\subsubsection{SIN + IN + finetune(IN) \texorpdfstring{\textrightarrow} _IN}
 
 
 \subsection{Noise resistance}
