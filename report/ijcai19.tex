@@ -109,67 +109,77 @@ in order to draw new conclusions and reinforce our understanding of the internal
 Modern Convolutional Neural Networks regularly reach very high performances on complex computer vision tasks 
 such as image classification and segmentation.
 These performances are reaching human levels in term of accuracy, and come from a long history of studies 
-on human and machine perception. As such, and reinforced with other experiments on the matter, 
-it is commonly believed that CNNs learn features from the shapes of objects during the training phase
-and use these for detection. \smallskip
+on human and machine perception. \medskip \par 
 
 \noindent
-The first proof that edges are fundamental in computer vision came from a very influential study on cognition, 
+As such, and reinforced with other experiments on the matter, 
+it is commonly believed that CNNs learn features from the shapes during the training phase
+and use these for detection.
+
+\subsection{Related Work}
+
+\noindent
+The first proof that shapes are fundamental in computer vision came from a very influential study on cognition, 
 by \cite{hubel1959receptive}, who described how biological neurons could extract features from images,
-amongst which certain types of neurons were activated specifically by edges. \smallskip
+amongst which certain types of neurons were activated specifically by edges. \medskip \par 
 
-% WHATS THAT
-% It showed that certain types of neurons were activated by edges. \\
-% \noindent
-% The convolution of an image with a sobel filter is known to extract edges.
-% Other filters can extract other image features. However, the filters had to be handcrafted, and
-% the most significant features of an image had to be determined by a human.
-
-% \textbf{TODO: REVIEW INTRODUCTION FROM HERE}
+\noindent 
+Another paper from \cite{marr1982vision} concluded that vision was hierachical. Low-level features, such as lines,
+were combined together to recognize more high level concepts, 
+like wheels, windows, etc, and form objects. \medskip \par 
 
 \noindent
-Another paper showed that vision was hierachical. Low-level features, such as lines,
-were combined together to recognize high level concepts, like wheels, windows, etc. 
-The famous Neocognition paper \cite{neocognitron} was the implementation of the idea of hierachical vision.
-The multilayered neural network proposed in the paper included convolutional layers with wheighted receptive fields (filters).
-It was the first known deep neural network. \smallskip
+The famous Neocognition paper \cite{neocognitron} was 
+the implementation that introduced the idea of hierachical vision. 
+
+\noindent
+The multilayered neural network they proposed 
+included multiple convolutional layers with wheighted receptive fields (filters).
+It was the first known deep neural network. \medskip \par
 
 \noindent
 However, the first modern convnet was LeNet \cite{Lecun98gradient-basedlearning}.
 This CNN used backpropgation to automatically learn the filter values to extract meaningful 
 features in images hierachically.
-Nowadays, all the recent convolutional neural networks are inspired from this network. \smallskip
+Nowadays, all the recent convolutional neural networks are inspired from this network. \medskip \par
 
 \noindent
 ConvNet were considered like a black box for a long time, 
 hence why extensive efforts were conducted during recent years in order 
-to analyze the internals of these networks. \smallskip
+to analyze the internals of these networks. \medskip \par
 
 \noindent
 The shape hypothesis that emerged from early experiments consists in
 "High-level units appear to learn representations of shapes occurring in natural images” 
 \cite{Kriegeskorte029876}. This theory quickly became widespread in the community, and
-is understandable given the history of computer vision. 
+is understandable given the history of computer vision. \medskip \par
 
-\textbf{TODO: CORRECT FROM HERE}
+\noindent
+Furthermore, there are a lot of studies comparing human vision with computer vision. For example,
+\cite{kubiliusshape} stated that 
+"implicitly learn representations of shape that reflect human shape perception"
+while a paper from \cite{ritter2017cognitive} concluded that 
+"state-of-the-art one-shot learning models trained on ImageNet exhibit  
+a similar bias to that observed in humans: they prefer to categorize objects according  
+to shape rather than color" . \medskip \par
 
-There are a lot of experiments comparing human vision with computer vision.
-X states that "implicitly learn representations of shape
- that reflect human shape perception".
-Y said that "that  state-of-the-artone  shot  learning  models  trained  on  ImageNetexhibit  a  similar  bias  to  that  observed  in  hu-mans:  
-they prefer to categorize objects according  to  shape  rather  than  color" \cite{ritter2017cognitive}
-
-However, several studies raised doubts about this hypothesis.
-According to X, CNNs are able to classify texturised images even if their shape structure is destraoyed.
-Moreover, Y showed that CNNs with constrained receptive field sizes can reach competitive accuracies on ImageNet.
-It is worth noticing that small receptive fields cannot capture the overal shape of an image.
+\noindent
+However, several researchers raised doubts about the shape hypothesis.
+According to studies from \cite{gatys2017textures} and \cite{brendel2019approximating}, 
+CNNs are able to classify texturised images even if their shape structure is destroyed.
+Moreover, Y showed that CNNs with constrained receptive field sizes 
+can reach competitive accuracies on ImageNet.
+It is also worth noticing that small receptive fields cannot capture the overal shape of an image.
 These results have led the authors of the paper we reproduce \cite{geirhos2018imagenettrained} 
-to emit a new hypothesis: the texture hypothesis where "in contrast to the
+to emit a new hypothesis: the texture hypothesis, where "in contrast to the
 common assumption, object textures are more important than global object shapes for CNN object
-recognition".
+recognition". \medskip \par
 
-Our objective is to test these hypothesis with diverse experiments.
+\noindent
+Our objective in this report is to submit those hypothesis to a test through diverse experiments 
+and validate in our environment the results obtained by the original authors.
 
+\newpage
 \section{Methodology}
 
 \subsection{Dataset}
@@ -237,6 +247,10 @@ TODO
 \subsubsection{Optimisation Function}
 
 
+\subsection{Other models ???}
+
+TODO MAYBE ?
+
 \subsection{Cue Conflict ???}
 
 TODO MAYBE ?
@@ -245,7 +259,6 @@ TODO MAYBE ?
 \section{Experiments}
 
 \subsection{Texture biais hypothesis}
-
 The first experiment conducted by the authors was to validate the texture biais 
 through image classification on handpicked stylized subsets. 
 Their hypothesis was that the re-texturized image would be classified as the texture representation, rather than 
@@ -278,7 +291,6 @@ led to classification probabities available in figure \ref{stylized-dog-parachut
 As expected, and although the results are a bit less accurate than on the original model, 
 we get the correct class prediction for the stylized image, suggesting that our CNN recognized the object
 from its shape this time around, having no texture clue to learn from.
-
 \textbf{TODO: FINISH FIGURE 2 AND PUT HERE}
 
 \begin{figure}[h!]\center
@@ -290,7 +302,6 @@ from its shape this time around, having no texture clue to learn from.
 \noindent
 The results of this experiment are also available in the dog-parachute notebook, 
 available on the github repository, under the section Test-Visualisation.
-
 \textbf{TODO: ADD LINK TO GITHUB EXPERIMENT FOR ABOVE.}
 
 \subsection{Training Procedure}
@@ -495,17 +506,32 @@ Secondly, we were expecting the SIN model to under perform in the low pass area,
 
 \subsection{Dataset}
 
-We used the same data as the authors: we didn't have time
-to find another image classification dataset that fitted our needs.
+As mentionned in the first section, we've used a subset of 
+the same dataset the authors used in their experiment. 
+Indeed, we didn't have much time to find another image classification dataset that fitted our needs.
 Many of the datasets we found online were poorly anotated, or the images
-were too large.
+were too large. \smallskip
 
-CIFAR-10's quality was to poor to do style transfer.
+\noindent
+The original Imagenet dataset had too many classes and a large number of images (over 14M), 
+which would take way too long to train. 
+We also did not have the physical storage capacities for this dataset. \smallskip
+
+\noindent
+On the other hand, CIFAR-10's images quality was too poor 
+to obtain nice results on our style transfer procedure. \smallskip
+
+\noindent
+We've also experimented quickly with the Natural Images dataset \cite{natural-images}, 
+but promising results that were obtained in parallele using the smaller version of imagenette, 
+imagenette-160, led us to focus on this dataset for the rest of our experiments. \smallskip
+
+\noindent
+It would be interesting, as a next step, to test this approach on the Natural Images dataset,
+or completely different dataset altogether and validate the results on those ones.
+
+% TODO
 %  (include figure in /imgs/dataset_comparison)
-
-The original Imagenet dataset had too many classes and too many images.
-
-It would be interesting to test this approach on a completely different dataset.
 
 \subsection{Results}
 
