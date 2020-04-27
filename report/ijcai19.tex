@@ -277,7 +277,7 @@ Here, SIN and IN represent Stylized-Imagenette and Imagenette datasets respectiv
   Architecture & IN\_IN & SIN\_SIN & IN\_SIN & SIN\_IN \\ \hline
   ResNet-18    & 0.9    & 0.8      & 0.3     & 0.6     \\ \Xhline{2\arrayrulewidth}
   \end{tabular}
-  \caption{Table X: Accuracy of ResNet18 model on different tests}
+  \caption{Accuracy of ResNet18 model on different tests}
 
 \end{table}
 
@@ -286,16 +286,32 @@ Here, SIN and IN represent Stylized-Imagenette and Imagenette datasets respectiv
 A model trained on IN and tested on IN is the usual training scheme used in the literature.
 It yields competitive results, as we already now.
 
-\includegraphics[width = 0.45\textwidth]{imgs/in/in-sin/in-sin_confusion_matrix_0.313.eps}
-
+\begin{figure}[h!]
+  \includegraphics[width = 0.45\textwidth]{imgs/in/in-in/in-in_confusion_matrix_0.963.eps}
+  \caption{Confusion Matrix of IN \texorpdfstring{\textrightarrow} .IN}
+\end{figure}
 
 \subsubsection{IN \texorpdfstring{\textrightarrow} .SIN}
-The original paper trained a model on IN and tested it on SIN which yielded poor results as 
+
+
+
+The original paper trained a model on IN and tested it on SIN which yielded poor results (see Fig.\ref{fig:cm_in-sin}) as 
 the model is texture biased, and the SIN dataset is specifically designed to promote shape biased models.
+
+\begin{figure}[h!]
+  \includegraphics[width = 0.45\textwidth]{imgs/in/in-sin/in-sin_confusion_matrix_0.313.eps}
+  \caption{Confusion Matrix of IN \texorpdfstring{\textrightarrow} .IN}
+  \label{fig:cm_in-sin}
+\end{figure}
 
 \subsubsection{SIN \texorpdfstring{\textrightarrow} .SIN}
 This training scheme yields fairly good results. This shows that the model is capable to learn
 and generalize on the stylized dataset.
+
+\begin{figure}[h!]
+  \includegraphics[width = 0.45\textwidth]{imgs/in/in-sin/in-sin_confusion_matrix_0.313.eps}
+  \caption{Confusion Matrix of IN \texorpdfstring{\textrightarrow} .IN}
+\end{figure}
 
 \subsubsection{SIN \texorpdfstring{\textrightarrow} .IN}
 
