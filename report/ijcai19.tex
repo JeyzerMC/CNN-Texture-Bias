@@ -253,7 +253,7 @@ to introduce a texture-shape cue conflicts. \smallskip
 
 \noindent
 The classification results after training the resnet-18 on the imagenette-160 dataset 
-can be seen on figure \ref{fig:dog-parachute}.
+can be seen on figure \ref{dog-parachute}.
 We've obtained probabities in line with what was suggested by the authors, 
 where the stylized image was recognized as a parachute, 
 due to the texture biais, rather than an English Springer.
@@ -261,13 +261,13 @@ due to the texture biais, rather than an English Springer.
 \begin{figure}[h!]\center
   \includegraphics[width=0.47\textwidth]{imgs/results-textures}
   \caption{Classification results after training on imagenette-160.}
-  \label{fig:dog-parachute}
+  \label{dog-parachute}
 \end{figure}
 
 \noindent
 Retraining the model on the stylized imagenette-160 dataset with the same parameters 
 (resnet-18, 20 epochs, 2e-2 learning rate), 
-led to classification probabities available in figure \ref{fig:stylized-dog-parachute}.
+led to classification probabities available in figure \ref{stylized-dog-parachute}.
 As expected, and although the results are a bit less accurate than on the original model, 
 we get the correct class prediction for the stylized image, suggesting that our CNN recognized the object
 from its shape this time around, having no texture clue to learn from.
@@ -277,7 +277,7 @@ from its shape this time around, having no texture clue to learn from.
 \begin{figure}[h!]\center
   \includegraphics[width=0.47\textwidth]{imgs/results-textures}
   \caption{Classification results with stylized imagenette-160.}
-  \label{fig:stylized-dog-parachute}
+  \label{stylized-dog-parachute}
 \end{figure}
 
 \noindent
@@ -294,7 +294,7 @@ available on the github repository, under the section Test-Visualisation.
 \begin{figure}[h!]
   \includegraphics[width = 0.45\textwidth]{imgs/sin/loss}
   \caption{Loss of training on IN \texorpdfstring{\textrightarrow} .IN}
-  \label{fig:loss_in}
+  \label{loss_in}
 \end{figure}
 
 \textbf{Learning rate}: We used FastAI's "lr finder" to tune our learning rate.
@@ -302,17 +302,20 @@ We fixed the maximum learning rate at 1e-2 by looking at the learning rate space
 \begin{figure}[h!]
   \includegraphics[width = 0.45\textwidth]{imgs/lr_find.eps}
   \caption{Learning rate finder\texorpdfstring{\textrightarrow} .IN}
-  \label{fig:loss_in}
+  \label{loss_in}
 \end{figure}
 
-\subsection{Experiment-specific parameters}
+\subsubsection{Experiment-specific parameters}
 We used Early Stopping for the FineTuning experiment only, because this model was more prone to overfitting.
+As we can see in Fig. \ref{lr_finetune} , the maximum learning rate has to be much lower than previous experiments 
+We defined the max learning rate at 1e-4.
 
 \begin{figure}[h!]
-  \includegraphics[width = 0.45\textwidth]{imgs/sinin/finetune/loss.eps}
-  \caption{Loss of training on the finetuning experiment}
-  \label{fig:loss_in}
+  \includegraphics[width = 0.45\textwidth]{imgs/lr_finetune.png}
+  \caption{Learning rate finder of SIN + IN + finetune(IN)\texorpdfstring{\textrightarrow} .IN}
+  \label{lr_finetune}
 \end{figure}
+
 
 \subsection{Robustness of shape-based representations}
 
@@ -331,25 +334,25 @@ Here, SIN and IN represent Stylized-Imagenette and Imagenette datasets respectiv
 
 \subsubsection{IN \texorpdfstring{\textrightarrow} .IN}
 A model trained on IN and tested on IN is the usual training scheme used in the literature.
-It yields competitive results, as we already know (Fig. \ref{fig:cm_in-in}).
+It yields competitive results, as we already know (Fig. \ref{cm_in-in}).
 
 \begin{figure}[h!]
   \includegraphics[width = 0.45\textwidth]{imgs/in/in-in/in-in_confusion_matrix_0.963.eps}
   \caption{Confusion Matrix of IN \texorpdfstring{\textrightarrow} .SIN}
-  \label{fig:cm_in-in}
+  \label{cm_in-in}
 \end{figure}
 
 \subsubsection{IN \texorpdfstring{\textrightarrow} .SIN}
 
 
 
-The original paper trained a model on IN and tested it on SIN which yielded poor results (Fig. \ref{fig:cm_in-sin}) as 
+The original paper trained a model on IN and tested it on SIN which yielded poor results (Fig. \ref{cm_in-sin}) as 
 the model is texture biased, and the SIN dataset is specifically designed to promote shape biased models.
 
 \begin{figure}[h!]
   \includegraphics[width = 0.45\textwidth]{imgs/in/in-sin/in-sin_confusion_matrix_0.313.eps}
   \caption{Confusion Matrix of IN \texorpdfstring{\textrightarrow} .SIN}
-  \label{fig:cm_in-sin}
+  \label{cm_in-sin}
 \end{figure}
 
 \subsubsection{SIN \texorpdfstring{\textrightarrow} .SIN}
@@ -359,7 +362,7 @@ and generalize on the stylized dataset.
 \begin{figure}[h!]
   \includegraphics[width = 0.45\textwidth]{imgs/sin/sin-sin/sin-sin_confusion_matrix_0.908.eps}
   \caption{Confusion Matrix of SIN \texorpdfstring{\textrightarrow} .SIN}
-  \label{fig:cm_sin-sin}
+  \label{cm_sin-sin}
 \end{figure}
 
 \subsubsection{SIN \texorpdfstring{\textrightarrow} .IN}
@@ -371,7 +374,7 @@ This demonstrates that a shape-biased model generalizes better than texture bias
 \begin{figure}[h!]
   \includegraphics[width = 0.45\textwidth]{imgs/sin/sin-in/sin-in_confusion_matrix_0.624.eps}
   \caption{Confusion Matrix of SIN \texorpdfstring{\textrightarrow} .IN}
-  \label{fig:cm_sin-in}
+  \label{cm_sin-in}
 \end{figure}
 
 \subsection{Shape-ResNet}
@@ -385,19 +388,33 @@ We can interpret these results by the fact IN-only training overfit a lot on tex
 \begin{figure}[h!]
   \includegraphics[width = 0.45\textwidth]{imgs/sinin/sinin-in_confusion_matrix_0.973.eps}
   \caption{Confusion Matrix of SIN + IN \texorpdfstring{\textrightarrow} .IN}
-  \label{fig:cm_sinin-in}
+  \label{cm_sinin-in}
 \end{figure}
 
 \subsubsection{SIN + IN + finetune(IN) \texorpdfstring{\textrightarrow} .IN}
 
-This method yields the best results, and seem to be the more robust. The finetuning only occurs
+This method yields the best results (Fig. \ref{cm_sinin-in-finetune}), and seem to be the more robust. The finetuning only occurs
 on the last layers of the ResNet (the classification layers) and not the feature extracting layers.
 Hence, the model does not overfit on textures, but is better to better classify images.
 
 \begin{figure}[h!]
   \includegraphics[width = 0.45\textwidth]{imgs/sinin/finetune/fine_tune_confusion_matrix_0.974.eps}
   \caption{Confusion Matrix of SIN + IN + finetune(IN) \texorpdfstring{\textrightarrow} .IN}
-  \label{fig:cm_sinin-in-finetune}
+  \label{cm_sinin-in-finetune}
+\end{figure}
+
+
+
+We can see on the Fig. \ref{loss_finetune} that the train loss is fluctuating a lot even with a small
+learning rate. However, the validation loss is stable and slowly decreasing.
+The validation loss is lower than the training loss, which is a sign of underfitting. This is what we want:
+the feature extraction is more shape biased than texture biased, and the model is not overfitting on the texture like
+before.
+
+\begin{figure}[h!]
+  \includegraphics[width = 0.45\textwidth]{imgs/sinin/finetune/loss.eps}
+  \caption{Loss of training on the finetuning experiment}
+  \label{loss_finetune}
 \end{figure}
 
 \subsection{Noise resistance}
