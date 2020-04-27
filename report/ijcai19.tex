@@ -94,11 +94,11 @@ The history of computer vision led us to believe that like humans,
 Convolutional Neural Networks (CNNs) would recognize objects mainly by their shapes.
 Recent studies in the field however, have  suggested that CNNs rely more on image textures 
 rather than edges and shapes in order to perform object detection. 
-A paper published in November 2018, by \cite{geirhos2018imagenettrained}, explored the idea of texture biais
-and presented novels solutions in order to shift the trend towards a stronger shape biais for CNNs, similar to 
+A paper published in November 2018, by \cite{geirhos2018imagenettrained}, explored the idea of texture bias
+and presented novels solutions in order to shift the trend towards a stronger shape bias for CNNs, similar to 
 how humans perceive things.
 The following report attempts to analyse the hypothesis proposed in the paper, 
-as well as offer a scopped reproduction of the experiments conducted by the authors, in a smaller environment, 
+as well as offer a scoped reproduction of the experiments conducted by the authors, in a smaller environment, 
 in order to draw new conclusions and reinforce our understanding of the internals of CNNs.
 \end{abstract}
 
@@ -145,8 +145,8 @@ Nowadays, all the recent convolutional neural networks are inspired from this ne
 
 \noindent
 ConvNet were considered like a black box for a long time, 
-hence why extensive efforts were conducted during recent years in order 
-to analyze the internals of these networks. \medskip \par
+resulting in considerable efforts made in
+recent years to analyze the inside of these networks. \medskip \par
 
 \noindent
 The shape hypothesis that emerged from early experiments consists in
@@ -166,7 +166,7 @@ to shape rather than color" . \medskip \par
 \noindent
 However, several researchers raised doubts about the shape hypothesis.
 According to studies from \cite{gatys2017textures} and \cite{brendel2019approximating}, 
-CNNs are able to classify texturised images even if their shape structure is destroyed.
+CNNs are able to classify texturized images even if their shape structure is destroyed.
 Moreover, the same paper from \cite{brendel2019approximating} also
 showed that CNNs with constrained receptive field sizes can reach competitive accuracies on ImageNet.
 It is also worth noticing that small receptive fields cannot capture the overal shape of an image.
@@ -175,7 +175,8 @@ to emit a new hypothesis: the texture hypothesis, where "in contrast to the
 common assumption, object textures are more important than global object shapes for CNN object
 recognition". \medskip \par
 
-\noindent
+\bigskip
+
 Our objective in this report is to submit those hypothesis to a test through diverse experiments 
 and validate in our environment the results obtained by the original authors.
 
@@ -190,8 +191,8 @@ This ensured that our results would be comparable to the authors,
 while keeping an acceptable size for the dataset given the time and material constraints.
 Imagenette contains 13394 images.
 Imagenette's train/test split is 70/30: 9469 images for the train and validation set, and 3925 images for the test set.
-It contains 10 easily classified classes from Imagenet, namely
-tench, English springer, cassette player, chain saw, church, French horn, garbage truck, gas pump, golf ball, parachute)
+It contains 10 easily classifiable classes from Imagenet, namely
+\textit{tench, English springer, cassette player, chain saw, church, French horn, garbage truck, gas pump, golf ball, parachute}.
 The classes are balanced with around 950 images in each one.
 
 This dataset is more easily classifiable than Imagenet in less time, which fits our purpose.
