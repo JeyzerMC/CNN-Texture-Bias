@@ -185,25 +185,31 @@ with their aspect ratio maintained.
 This procedure ensures that the images conserve their edges, but not their textures.
 In order to destroy all the texture information of an image without its edges, we used style transfer like in
 the original paper.
-However, we generated our own Stylized-Dataset.
+However, we generated our own Stylized-Dataset. \smallskip
 
+\noindent
 The image for which you want to change the texture, but keep the edges is called the content image.
 The image were the the texture is extracted is called the texture image.
-The image created by the style transfer is called the stylized image.
+The image created by the style transfer is called the stylized image. \smallskip
 
+\noindent
 We applied style transfer on Imagenette to replace the original texture of the object (dog's fur for example) 
-with a random texture (a parachute's fabric and color) from sampled from the Describable Texture Dataset \cite{cimpoi14describing}.
+with a random texture (a parachute's fabric and color) 
+from sampled from the Describable Texture Dataset \cite{cimpoi14describing}. \smallskip
 
+\noindent
 Our first aproach was to use a random image from the Texture Dataset to stylize Imagenette. However, 
-the edges of the images were sometimes destroyed, and were not identifiable by humans.
+the edges of the images were sometimes destroyed, and were not identifiable by humans. \smallskip
 
+\noindent
 To avoid poor quality images, we handpicked 11 texture images that generated good quality stylized images.
 Each time an Imagenette image was to be stylized, we picked a texture image randomly from our 11 textures.
-This ensured that the texture of a stylized image had no correlation with its original class.
+This ensured that the texture of a stylized image had no correlation with its original class. \smallskip
 
-We used the implementation of AdaIN-style \cite{huang2017arbitrary} made by Bethge Lab \cite{stylizeddatasets2019}.
+\noindent
+We used the implementation of AdaIN-style \cite{huang2017arbitrary} made by \cite{stylizeddatasets2019}.
 
-\includegraphics[width=0.47\textwidth]{imgs/adain_architecture}
+\includegraphics[width=0.45\textwidth]{imgs/adain_architecture}
 
 AdaIN-style is the first real-time style transfer algorithm than can transfer arbitrary new styles.
 That means that we can stylize an image with any texture image we want.
