@@ -290,19 +290,18 @@ the underlying content using the shapes, which would be contrary to popular beli
 We've reproduced their experiment using the picture of an English Springer as our content image (a), 
 and a stylized version of the Springer (b) using AdaIN style transfer
 (Huang \& Belongie, 2017) described in section \ref{2.2-style-transfer}
-to introduce a texture-shape cue conflicts. \medskip \par
-
-\noindent
+to introduce a texture-shape cue conflicts.
 The texture used to generate the stylized image is a colorful parachute, 
 which can be seen in Fig. \ref{imagenette-160-parachute-predictions}. 
 The model trained on imagenette-160 succesfully identified both the texture and the test image.
 \medskip \par
 
-\begin{figure}[!htbp]\center
+\begin{center}
+  \captionsetup{type=figure}
   \includegraphics[width=0.35\textwidth]{imgs/experiment-1/imagenette-160-parachute-predictions}
-  \caption{Classification results of the colorful parachute texture and test image after training on imagenette-160.}
+  \captionof{figure}{Classification results of the colorful parachute texture and test image after training on imagenette-160.}
   \label{imagenette-160-parachute-predictions}
-\end{figure}
+\end{center}
 
 \noindent
 The classification results after training the resnet-18 on the imagenette-160 dataset 
@@ -311,11 +310,12 @@ We've obtained probabities in line with what was suggested by the authors,
 where the stylized image was recognized as a parachute, 
 due to the texture bias, rather than an English Springer. \medskip \par
 
-\begin{figure}[!htbp]\center
+\begin{center}
+  \captionsetup{type=figure}
   \includegraphics[width=0.35\textwidth]{imgs/experiment-1/imagenette-160-dog-predictions}
-  \caption{Classification results for the English Springer after training the model on imagenette-160.}
+  \captionof{figure}{Classification results for the English Springer after training the model on imagenette-160.}
   \label{imagenette-160-dog-predictions}
-\end{figure}
+\end{center}
 
 \noindent
 Coincidentally, training the model on the stylized dataset, 
@@ -330,32 +330,44 @@ The content image on the right however is correctly predicted, thanks to its for
 It is also to be noted that the confidence in this prediction is lower than for the imagenette-160 trained model,
 as priving the CNN from its texture bias reduce the performances of the model. \medskip \par
 
-\begin{figure}[!htbp]\center
+\begin{center}
+  \captionsetup{type=figure}
   \includegraphics[width=0.35\textwidth]{imgs/experiment-1/stylized-imagenette-160-parachute-predictions}
-  \caption{Classification results of the colorful parachute texture 
+  \captionof{figure}{Classification results of the colorful parachute texture 
             and test image after training on stylized-imagenette-160.}
   \label{stylized-imagenette-160-parachute-predictions}
-\end{figure}
-
+\end{center}
+%TODO: UPDATE IMAGE WITH THE NEW PROBABILITIES FROM LATEST MODEL
+\noindent
 Retraining the model on the stylized imagenette-160 dataset with the same parameters 
 (resnet-18, 20 epochs, 2e-2 learning rate), 
-led to classification probabities available in Fig. \ref{stylized-imagenette-160-dog-predictions}.
-As expected, and although the results are a bit less accurate than on the original model, 
-we get the correct class prediction for the stylized image, suggesting that our CNN recognized the object
-from its shape this time around, having no texture clue to learn from.
-\textbf{TODO: UPDATE IMAGE WITH THE NEW PROBABILITIES FROM LATEST MODEL}
-
-\begin{figure}[!htbp]\center
-  \includegraphics[width=0.35\textwidth]{imgs/experiment-1/stylized-imagenette-160-dog-predictions}
-  \caption{Classification results for the English Springer after training the model on stylized imagenette-160.}
-  \label{stylized-imagenette-160-dog-predictions}
-\end{figure}
+led to classification probabities available in 
+Fig. \ref{stylized-imagenette-160-dog-predictions}. \medskip \par
 
 \noindent
-The results of this experiment are also available in the dog-parachute notebook, 
-available on the github repository, under the section Test-Visualisation.
-\textbf{TODO: ADD LINK TO GITHUB EXPERIMENT FOR ABOVE.}
+As expected, and although the results are a bit less accurate than on the original model, 
+we get the correct class prediction for the stylized image, suggesting that our CNN recognized the object
+from its shape this time around, having no texture clue to learn from. \medskip \par
 
+\noindent
+The confidence level for the prediction of the original image however is higher for this model, 
+suggesting that it was easier to infer the class of this particuliar image 
+from its shape rather than its texture. 
+This shows that, although stylized-imagenette-160 does not perform on average better than imagenette-160,
+there are still instances where it can out-performs the later, when enough shape clue is present. \medskip \par
+
+\begin{center}
+  \captionsetup{type=figure}
+  \includegraphics[width=0.35\textwidth]{imgs/experiment-1/stylized-imagenette-160-dog-predictions}
+  \captionof{figure}{Classification results for the English Springer after training the model on stylized imagenette-160.}
+  \label{stylized-imagenette-160-dog-predictions}
+\end{center}
+
+\noindent
+The results of this study are also available in the dog-parachute-experiment notebook, 
+in the github repository.
+
+\newpage
 \subsection{Training Procedure}
 
 
