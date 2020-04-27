@@ -195,6 +195,7 @@ We used the '160px' version of the images, where the shortest size of the images
 with their aspect ratio maintained.
 
 \subsection{Style Transfer}
+\label{2.2-style-transfer}
 
 This procedure ensures that the images conserve their edges, but not their textures.
 In order to destroy all the texture information of an image without its edges, we used style transfer like in
@@ -222,9 +223,9 @@ This ensured that the texture of a stylized image had no correlation with its or
 
 \noindent
 We used the implementation of AdaIN-style \cite{huang2017arbitrary} made by \cite{stylizeddatasets2019}
-for the style transfer. The architecture of AdaIn can be seen on Fig. \ref{adain-archi}.
+for the style transfer. The architecture of AdaIN-style can be seen on Fig. \ref{adain-archi}.
 \medskip \par
-
+\vspace{-0.2cm}
 \noindent
 AdaIN-style is the first real-time style transfer algorithm than can transfer arbitrary new styles.
 That means that we can stylize an image with any texture image we want.
@@ -276,7 +277,7 @@ TODO MAYBE ?
 For all of our experiments, SIN and IN represent Stylized-Imagenette-160 and Imagenette-160 datasets respectively.
 For example, the nomenclature IN \texorpdfstring{\textrightarrow} .IN signifies that the 
 model was trained on IN and tested on IN.
-The two datasets have the same image identifiers for their testing set, only the stylization changes.
+The two datasets have the same image identifiers for their testing set, only the stylization introduced a change.
 
 \subsection{Texture bias hypothesis}
 
@@ -287,37 +288,68 @@ the underlying content using the shapes, which would be contrary to popular beli
 
 \noindent
 We've reproduced their experiment using the picture of an English Springer as our content image (a), 
-and a stylized version of the Springer (b) using AdaIN style transfer 
-(Huang \& Belongie, 2017) % TODO: ADD REFERENCE TO STYLE TRANSFER
-to introduce a texture-shape cue conflicts. The texture used is of a parachute. \medskip \par
+and a stylized version of the Springer (b) using AdaIN style transfer
+(Huang \& Belongie, 2017) described in section \ref{2.2-style-transfer}
+to introduce a texture-shape cue conflicts. \medskip \par
+
+\noindent
+The texture used to generate the stylized image is a colorful parachute, 
+which can be seen in Fig. \ref{imagenette-160-parachute-predictions}. 
+The model trained on imagenette-160 succesfully identified both the texture and the test image.
+\medskip \par
+
+\begin{figure}[!htbp]\center
+  \includegraphics[width=0.35\textwidth]{imgs/experiment-1/imagenette-160-parachute-predictions}
+  \caption{Classification results of the colorful parachute texture and test image after training on imagenette-160.}
+  \label{imagenette-160-parachute-predictions}
+\end{figure}
 
 \noindent
 The classification results after training the resnet-18 on the imagenette-160 dataset 
-can be seen on Fig. \ref{dog-parachute}.
+can be seen on Fig. \ref{imagenette-160-dog-predictions}.
 We've obtained probabities in line with what was suggested by the authors, 
 where the stylized image was recognized as a parachute, 
-due to the texture bias, rather than an English Springer.
+due to the texture bias, rather than an English Springer. \medskip \par
 
-% \begin{figure}[h!]\center
-%   \includegraphics[width=0.47\textwidth]{imgs/results-textures}
-%   \caption{Classification results after training on imagenette-160.}
-%   \label{dog-parachute}
-% \end{figure}
+\begin{figure}[!htbp]\center
+  \includegraphics[width=0.35\textwidth]{imgs/experiment-1/imagenette-160-dog-predictions}
+  \caption{Classification results for the English Springer after training the model on imagenette-160.}
+  \label{imagenette-160-dog-predictions}
+\end{figure}
 
 \noindent
+Coincidentally, training the model on the stylized dataset, 
+which was believed to reduce the texture bias in favor of a shape bias, no longer produce correct predictions
+for the texture image of the parachute, 
+as can be seen in Fig. \ref{stylized-imagenette-160-parachute-predictions}. 
+The texture image is wrongfully predicted as a garbage truck, 
+due to the lack of shape clue in the image. \medskip \par
+
+\noindent
+The content image on the right however is correctly predicted, thanks to its form. 
+It is also to be noted that the confidence in this prediction is lower than for the imagenette-160 trained model,
+as priving the CNN from its texture bias reduce the performances of the model. \medskip \par
+
+\begin{figure}[!htbp]\center
+  \includegraphics[width=0.35\textwidth]{imgs/experiment-1/stylized-imagenette-160-parachute-predictions}
+  \caption{Classification results of the colorful parachute texture 
+            and test image after training on stylized-imagenette-160.}
+  \label{stylized-imagenette-160-parachute-predictions}
+\end{figure}
+
 Retraining the model on the stylized imagenette-160 dataset with the same parameters 
 (resnet-18, 20 epochs, 2e-2 learning rate), 
-led to classification probabities available in Fig. \ref{stylized-dog-parachute}.
+led to classification probabities available in Fig. \ref{stylized-imagenette-160-dog-predictions}.
 As expected, and although the results are a bit less accurate than on the original model, 
 we get the correct class prediction for the stylized image, suggesting that our CNN recognized the object
 from its shape this time around, having no texture clue to learn from.
-\textbf{TODO: FINISH FIGURE 2 AND PUT HERE}
+\textbf{TODO: UPDATE IMAGE WITH THE NEW PROBABILITIES FROM LATEST MODEL}
 
-% \begin{figure}[h!]\center
-%   \includegraphics[width=0.47\textwidth]{imgs/results-textures}
-%   \caption{Classification results with stylized imagenette-160.}
-%   \label{stylized-dog-parachute}
-% \end{figure}
+\begin{figure}[!htbp]\center
+  \includegraphics[width=0.35\textwidth]{imgs/experiment-1/stylized-imagenette-160-dog-predictions}
+  \caption{Classification results for the English Springer after training the model on stylized imagenette-160.}
+  \label{stylized-imagenette-160-dog-predictions}
+\end{figure}
 
 \noindent
 The results of this experiment are also available in the dog-parachute notebook, 
