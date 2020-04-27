@@ -225,6 +225,10 @@ A Decoder then decodes the AdaIN output to image space.
 
 TODO
 
+\subsubsection{Loss Function}
+
+\subsubsection{Optimisation Function}
+
 
 \subsection{Cue Conflict ???}
 
@@ -239,6 +243,8 @@ namely Resnet-50, BagNet-33, BagNet-17 and BagNet-9
 MODELS
 TEXTURES
 DATASETS
+
+
 
 \subsection{Texture biais hypothesis}
 % The first experiment of this analysis was to reproduce the original experiment of the paper with imagenette-160 
@@ -284,6 +290,34 @@ from its shape this time around, having no texture clue to learn from.
   \caption{Classification results with stylized imagenette-160.}
 \end{figure}
 
+\subsection{Training Procedure}
+
+\subsubsection{Global Parameters}
+
+\textbf{Number of epochs}: For our experiments, we did a fixed number of epochs (15) because it did not overfit, nor underfit the data too much.
+\begin{figure}[h!]
+  \includegraphics[width = 0.45\textwidth]{imgs/sin/loss}
+  \caption{Loss of training on IN \texorpdfstring{\textrightarrow} .IN}
+  \label{fig:loss_in}
+\end{figure}
+
+\textbf{Learning rate}: We used FastAI's "lr finder" to tune our learning rate.
+We fixed the maximum learning rate at 1e-2 by looking at the learning rate space search graph.
+\begin{figure}[h!]
+  \includegraphics[width = 0.45\textwidth]{imgs/lr_find.eps}
+  \caption{Learning rate finder\texorpdfstring{\textrightarrow} .IN}
+  \label{fig:loss_in}
+\end{figure}
+
+\subsection{Experiment-specific parameters}
+We used Early Stopping for the FineTuning experiment only, because this model was more prone to overfitting.
+
+\begin{figure}[h!]
+  \includegraphics[width = 0.45\textwidth]{imgs/sinin/finetune/loss.eps}
+  \caption{Loss of training on the finetuning experiment}
+  \label{fig:loss_in}
+\end{figure}
+
 \subsection{Robustness of shape-based representations}
 
 We reproduce the 4 experiments of the paper to prove the robustness of a shape-biased CNN.
@@ -301,16 +335,19 @@ Here, SIN and IN represent Stylized-Imagenette and Imagenette datasets respectiv
 
 \subsubsection{IN \texorpdfstring{\textrightarrow} .IN}
 A model trained on IN and tested on IN is the usual training scheme used in the literature.
-It yields competitive results, as we already now.
+It yields competitive results, as we already(Fig.\ref{fig:cm_in-in}).
 
 \begin{figure}[h!]
   \includegraphics[width = 0.45\textwidth]{imgs/in/in-in/in-in_confusion_matrix_0.963.eps}
-  \caption{Confusion Matrix of IN \texorpdfstring{\textrightarrow} .IN}
+  \caption{Confusion Matrix of IN \texorpdfstring{\textrightarrow} .SIN}
+  \label{fig:cm_in-in}
 \end{figure}
 
 \subsubsection{IN \texorpdfstring{\textrightarrow} .SIN}
 
-The original paper trained a model on IN and tested it on SIN which yielded poor results (see Fig.\ref{fig:cm_in-sin}) as 
+
+
+The original paper trained a model on IN and tested it on SIN which yielded poor results (Fig.\ref{fig:cm_in-sin}) as 
 the model is texture biased, and the SIN dataset is specifically designed to promote shape biased models.
 
 \begin{figure}[h!]
@@ -322,11 +359,6 @@ the model is texture biased, and the SIN dataset is specifically designed to pro
 \subsubsection{SIN \texorpdfstring{\textrightarrow} .SIN}
 This training scheme yields fairly good results. This shows that the model is capable to learn
 and generalize on the stylized dataset.
-
-\begin{figure}[h!]
-  \includegraphics[width = 0.45\textwidth]{imgs/in/in-sin/in-sin_confusion_matrix_0.313.eps}
-  \caption{Confusion Matrix of IN \texorpdfstring{\textrightarrow} .IN}
-\end{figure}
 
 \subsubsection{SIN \texorpdfstring{\textrightarrow} .IN}
 
