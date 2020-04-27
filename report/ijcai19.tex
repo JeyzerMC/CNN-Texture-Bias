@@ -221,6 +221,13 @@ This pretrained architecture uses a VGG-19 network to encode the content and sty
 An AdaIN layer is then used to perform style transfer in the feature space.   
 A Decoder then decodes the AdaIN output to image space.
 
+\subsection{Metrics}
+
+We decided to only use Accuracy, as our class are balanced, and not too numerous.
+
+Top-k accuracy is a useful metric when there is a lot of classes to predict. Our dataset only
+contains 10 classes, so we deemed it wasn't necessary to introduce this metric.
+
 \subsection{ResNet}
 
 TODO
@@ -530,6 +537,11 @@ Overall, we were able to reproduce their results and
 even surpass them. This can be justified by the fact that the classes
 in Imagenette were handpicked to be easily classified, and that there were less 
 classes than Imagenet.
+Our results fluacted a bit between different training. For example, finetuning does not seem to be necessary 
+in our study. However, when the performance of SIN + IN is sometimes lower than 0.9. In this scenario, finetuning
+always surpassed IN \texorpdfstring{\textrightarrow} .IN.
+To correct this, we could have calculated our accuracy on the average of five runs, like the auhors of Imagenette \cite{fastai2019}
+suggested.
 
 \subsection{Experiments}
 
