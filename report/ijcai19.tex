@@ -286,6 +286,8 @@ Here, SIN and IN represent Stylized-Imagenette and Imagenette datasets respectiv
 A model trained on IN and tested on IN is the usual training scheme used in the literature.
 It yields competitive results, as we already now.
 
+\includegraphics[width = 0.45\textwidth]{imgs/in/in-sin/in-sin_confusion_matrix_0.313.eps}
+
 
 \subsubsection{IN \texorpdfstring{\textrightarrow} .SIN}
 The original paper trained a model on IN and tested it on SIN which yielded poor results as 
@@ -298,34 +300,71 @@ and generalize on the stylized dataset.
 \subsubsection{SIN \texorpdfstring{\textrightarrow} .IN}
 
 This training scheme yields inferior results than IN \texorpdfstring{\textrightarrow} IIN, however
-there are much better than IN \texorpdfstring{\textrightarrow} .SIN. 
-
+there are much better than IN \texorpdfstring{\textrightarrow} .SIN.
 This demonstrates that a shape-biased model generalizes better than texture biased models.
 
 \subsection{Shape-ResNet}
 
 \subsubsection{SIN + IN \texorpdfstring{\textrightarrow} .IN}
 
+Mixing the 2 datasets has the effect of data augmentation. The model will be better
+at generalizing. The results are better than the SIN-only, but worse that IN-only training.
+We can interpret these results by the fact IN-only training overfit a lot on texture.
+
 \subsubsection{SIN + IN + finetune(IN) \texorpdfstring{\textrightarrow} .IN}
 
+This method yields the best results, and seem to be the more robust. The finetuning only occurs
+on the last layers of the ResNet (the classification layers) and not the feature extracting layers.
+Hence, the model does not overfit on textures, but is better to better classify images.
 
 \subsection{Noise resistance}
 
 EXPERIENCE ABOUDELOU
 
-\includegraphics[width = 0.45\textwidth]{imgs/uniform}
+\includegraphics[width = 0.45\textwidth]{imgs/noise/uniform.eps}
 
-\includegraphics[width = 0.45\textwidth]{imgs/sin/loss.eps}
+\includegraphics[width = 0.45\textwidth]{imgs/sinin/loss.eps}
 
 \newpage
 \section{Approach analysis}
 
-Limites de notre approches
+\subsection{Dataset}
+
+We used the same data as the authors: we didn't have time
+to find another image classification dataset that fitted our needs.
+Many of the datasets we found online were poorly anotated, or the images
+were too large.
+
+CIFAR-10's quality was to poor to do style transfer.
+%  (include figure in /imgs/dataset_comparison)
+
+The original Imagenet dataset had too many classes and too many images.
+
+It would be interesting to test this approach on a completely different dataset.
+
+\subsection{Results}
+
+Overall, we were able to reproduce their results and
+even surpass them. This can be justified by the fact that the classes
+in Imagenette were handpicked to be easily classified, and that there were less 
+classes than Imagenet.
+
+\subsection{Experiments}
+
+We only reproduced experiments that yielded interesting results 
+in the original paper. We can see the excellent quality of the work, 
+because their experiments were easily reproducable, and most of the 
+steps were clearly explained.
+
+\subsection{Ideas for future studies}
+
+Testing this robustness in related areas were shape bias (like image segmentation) 
+is more important than image classification could be interesting.
 
 \newpage
 \section{Conclusion}
 
-This is where we conclude bois
+This is where we conclude bois hjf
 
 % To begin with, we reproduced the first experiment of the paper. This experiment
 % is represents the misconception we have about how CNNs learn.
