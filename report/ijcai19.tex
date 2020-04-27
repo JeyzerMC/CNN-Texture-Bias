@@ -171,7 +171,7 @@ recognition". \medskip \par
 \bigskip
 
 Our objective in this report is to submit those hypothesis to a test through diverse experiments 
-and validate in our own environment the results obtained by the original authors.
+and validate the results obtained by the original authors in our own environment .
 
 \newpage
 \section{Methodology}
@@ -201,9 +201,9 @@ the original paper.
 However, we generated our own Stylized-Dataset. \smallskip
 
 \noindent
-The image for which you want to change the texture, but keep the edges is called the content image.
-The image were the the texture is extracted is called the texture image.
-The image created by the style transfer is called the stylized image. \smallskip
+The image for which you want to change the texture, but keep the edges is called the \textbf{content image}.
+The image were the the texture is extracted is called the \textbf{texture image}.
+The image created by the style transfer is called the \textbf{stylized image}. \smallskip
 
 \noindent
 We applied style transfer on Imagenette to replace the original texture of the object (dog's fur for example) 
@@ -234,8 +234,15 @@ A Decoder then decodes the AdaIN output to image space.
 
 \subsection{Metrics}
 
-We decided to only use Accuracy, as our class are balanced, and not too numerous.
+We decided to only use the multi-class Accuracy, as our class are balanced, and not too numerous.
 
+$ Accuracy = \frac{TP + TN}{TP + TN + FP + FN}  $ \medskip
+
+\noindent
+where TP is the True Positives, TN is True Negatives, FP is the sum of the False Positives
+and FN is the sum of False Negatives.
+
+\noindent
 Top-k accuracy is a useful metric when there is a lot of classes to predict. Our dataset only
 contains 10 classes, so we deemed it wasn't necessary to introduce this metric.
 
@@ -259,9 +266,10 @@ TODO MAYBE ?
 \newpage
 \section{Experiments}
 
-For all , SIN and IN represent Stylized-Imagenette and Imagenette datasets respectively.
+For all experiments, SIN and IN represent Stylized-Imagenette and Imagenette datasets respectively.
 For example, the nomenclature IN \texorpdfstring{\textrightarrow} .IN signifies that the 
-model was trained on IN and tested on IN.
+model was trained on IN and tested on IN. \\
+\noindent
 IN and SIN have the same image ids for their testing set, only the stylization changes.
 
 \subsection{Texture bias hypothesis}
@@ -279,7 +287,7 @@ to introduce a texture-shape cue conflicts. \smallskip
 
 \noindent
 The classification results after training the resnet-18 on the imagenette-160 dataset 
-can be seen on figure \ref{dog-parachute}.
+can be seen on Fig. \ref{dog-parachute}.
 We've obtained probabities in line with what was suggested by the authors, 
 where the stylized image was recognized as a parachute, 
 due to the texture bias, rather than an English Springer.
@@ -293,7 +301,7 @@ due to the texture bias, rather than an English Springer.
 \noindent
 Retraining the model on the stylized imagenette-160 dataset with the same parameters 
 (resnet-18, 20 epochs, 2e-2 learning rate), 
-led to classification probabities available in figure \ref{stylized-dog-parachute}.
+led to classification probabities available in Fig. \ref{stylized-dog-parachute}.
 As expected, and although the results are a bit less accurate than on the original model, 
 we get the correct class prediction for the stylized image, suggesting that our CNN recognized the object
 from its shape this time around, having no texture clue to learn from.
