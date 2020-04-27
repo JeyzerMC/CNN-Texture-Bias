@@ -265,7 +265,8 @@ and a stylized version of the Springer (c) using AdaIN style transfer
 to introduce a texture-shape cue conflicts. \smallskip
 
 \noindent
-The classification results after training the resnet-18 on the imagenette-160 dataset can be seen on figure 1.
+The classification results after training the resnet-18 on the imagenette-160 dataset 
+can be seen on figure \ref{fig:dog-parachute}.
 We've obtained probabities in line with what was suggested by the authors, 
 where the stylized image was recognized as a parachute, 
 due to the texture biais, rather than an English Springer.
@@ -273,11 +274,13 @@ due to the texture biais, rather than an English Springer.
 \begin{figure}[h!]\center
   \includegraphics[width=0.47\textwidth]{imgs/results-textures}
   \caption{Classification results after training on imagenette-160.}
+  \label{fig:dog-parachute}
 \end{figure}
 
 \noindent
 Retraining the model on the stylized imagenette-160 dataset with the same parameters 
-(resnet-18, 20 epochs, 2e-2 learning rate), led to classification probabities available in figure 2.
+(resnet-18, 20 epochs, 2e-2 learning rate), 
+led to classification probabities available in figure \ref{fig:stylized-dog-parachute}.
 As expected, and although the results are a bit less accurate than on the original model, 
 we get the correct class prediction for the stylized image, suggesting that our CNN recognized the object
 from its shape this time around, having no texture clue to learn from.
@@ -288,6 +291,7 @@ from its shape this time around, having no texture clue to learn from.
 \begin{figure}[h!]\center
   \includegraphics[width=0.47\textwidth]{imgs/results-textures}
   \caption{Classification results with stylized imagenette-160.}
+  \label{fig:stylized-dog-parachute}
 \end{figure}
 
 \subsection{Training Procedure}
