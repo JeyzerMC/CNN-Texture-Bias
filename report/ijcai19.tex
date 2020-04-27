@@ -113,7 +113,7 @@ and use these for detection. \smallskip
 
 \noindent
 The first proof that edges are fundamental in computer vision came from a very influential study on cognition, 
-by \cite{hubel1959receptive}, who described how biological neurons extracted features from images,
+by \cite{hubel1959receptive}, who described how biological neurons could extract features from images,
 amongst which certain types of neurons were activated specifically by edges. \smallskip
 
 % WHATS THAT
@@ -123,13 +123,12 @@ amongst which certain types of neurons were activated specifically by edges. \sm
 % Other filters can extract other image features. However, the filters had to be handcrafted, and
 % the most significant features of an image had to be determined by a human.
 
-\textbf{TODO: REVIEW INTRODUCTION FROM HERE}
+% \textbf{TODO: REVIEW INTRODUCTION FROM HERE}
 
 \noindent
-Another paper showed that vision was hierachical. Low-level features (simple shapes like lines)
-were combined to recognize high level features (like wheels, windows ...).
-
-The famous Neocognition paper was the implementation of the idea of hierachical vision.
+Another paper showed that vision was hierachical. Low-level features, such as lines,
+were combined together to recognize high level concepts, like wheels, windows, etc. 
+The famous Neocognition paper \cite{neocognitron} was the implementation of the idea of hierachical vision.
 This multilayered neural network included convolutional layers with wheighted receptive fields (filters).
 It was the first deep neural network.
 
@@ -248,49 +247,65 @@ Their hypothesis was that the re-texturized image would be classified as the tex
 the underlying content using the shapes, which would be contrary to popular belief. \smallskip
 
 \noindent
-We've reproduced their experiment in figure 1, % TODO: ADD LINK ??
-using the picture of an English Springer as our content image (a), 
+We've reproduced their experiment using the picture of an English Springer as our content image (a), 
 a colorful parachute as our texture image (b),
 and a stylized version of the Springer (c) using AdaIN style transfer 
 (Huang \& Belongie, 2017) % TODO: ADD REFERENCE TO STYLE TRANSFER
-to introduce a texture-shape cue conflicts.
+to introduce a texture-shape cue conflicts. \smallskip
+
+\noindent
+The classification results after training the resnet-18 on the imagenette-160 dataset can be seen on figure 1.
+We've obtained probabities in line with what was suggested by the authors, 
+where the stylized image was recognized as a parachute, 
+due to the texture biais, rather than an English Springer.
 
 \begin{figure}[h!]\center
   \includegraphics[width=0.47\textwidth]{imgs/results-textures}
+  \caption{Classification results after training on imagenette-160.}
 \end{figure}
 
 \noindent
-As we can see, we've obtained the same classification results as the authors, 
-where the stylized image was being recognized as the parachute texture
-rather than the underlying Springer content.
+Retraining the model on the stylized imagenette-160 dataset with the same parameters 
+(resnet-18, 20 epochs, 2e-2 learning rate), led to classification probabities available in figure 2.
+As expected, and although the results are a bit less accurate than on the original model, 
+we get the correct class prediction for the stylized image, suggesting that our CNN recognized the object
+from its shape this time around, having no texture clue to learn from.
+
+
+\textbf{TODO: FINISH FIGURE 2 AND PUT HERE}
+
+\begin{figure}[h!]\center
+  \includegraphics[width=0.47\textwidth]{imgs/results-textures}
+  \caption{Classification results with stylized imagenette-160.}
+\end{figure}
 
 \subsection{Robustness of shape-based representations}
 
 We reproduce the 4 experiments of the paper to prove the robustness of a shape-biased CNN.
 Here, SIN and IN represent the Stylized-Imagenette the Imagenette dataset respectively.
 
-\begin{table}[]
+\begin{table}
   \begin{tabular}{|l|l|l|l|l|}
   \hline
   Architecture & IN\_IN & SIN\_SIN & IN\_SIN & SIN\_IN \\ \hline
   ResNet-18    & 0.9    & 0.8      & 0.3     & 0.6     \\ \hline
   \end{tabular}
-  \end{table}
+\end{table}
 
-\subsubsection{IN \texorpdfstring{\textrightarrow} _IN}
+\subsubsection{IN \texorpdfstring{\textrightarrow} IIN}
 A model trained on IN and tested on IN is the usual training scheme used in the literature.
 It yields competitive results, as we already now.
 
 
-\subsubsection{IN \texorpdfstring{\textrightarrow} _SIN}
+\subsubsection{IN \texorpdfstring{\textrightarrow} SSIN}
 The original paper trained a model on IN and tested it on SIN which yielded poor results as 
 the model is texture biased, and the SIN dataset is specifically designed to promote shape biased models.
 
-\subsubsection{SIN \texorpdfstring{\textrightarrow} _SIN}
+\subsubsection{SIN \texorpdfstring{\textrightarrow} SSIN}
 This training scheme yields fairly good results. This shows that the model is capable to learn
 and generalize on the stylised dataset.
 
-\subsubsection{SIN \texorpdfstring{\textrightarrow} _IN}
+\subsubsection{SIN \texorpdfstring{\textrightarrow} IIN}
 
 This training scheme yields inferior results than IN \texorpdfstring{\textrightarrow} IIN, however
 there are much better than IN \texorpdfstring{\textrightarrow} _SIN. 
@@ -299,9 +314,9 @@ This demonstrates that a shape-biased model generalizes better than texture bias
 
 \subsection{Shape-ResNet}
 
-\subsubsection{SIN + IN \texorpdfstring{\textrightarrow} _IN}
+\subsubsection{SIN + IN \texorpdfstring{\textrightarrow} IIN}
 
-\subsubsection{SIN + IN + finetune(IN) \texorpdfstring{\textrightarrow} _IN}
+\subsubsection{SIN + IN + finetune(IN) \texorpdfstring{\textrightarrow} IIN}
 
 
 \subsection{Noise resistance}
