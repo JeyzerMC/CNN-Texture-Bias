@@ -258,23 +258,39 @@ As we can see, we've obtained the same classification results as the authors,
 where the stylized image was being recognized as the parachute texture
 rather than the underlying Springer content.
 
-\subsection{Stylized-imagenette-160}
-
-In order to reduce the texture biais of ResNet-18, and introduce a more familiar shape biais, 
-the authors trained their model on a stylized version of Imagenet. 
-Due to time and material constraints, we've decided to use 
-
 \subsection{Robustness and accuracy of shape-based representations}
 
 We reproduce the 4 experiments of the paper to prove the robustness of a shape-biased CNN.
 Here, SIN and IN represent the Stylized-Imagenette the Imagenette dataset respectively.
 
-A model trained on IN and tested on IN is the usual training scheme used in the litterature.
-The orignal paper 
+INSERER TABLEAU
+
+\subsubsection{IN \textrightarrow  IN}
+A model trained on IN and tested on IN is the usual training scheme used in the literature.
+It yields competitive results, as we already now.
+
+
+\subsubsection{IN \textrightarrow  SIN}
+The original paper trained a model on IN and tested it on SIN which yielded poor results as 
+the model is texture biased, and the SIN dataset is specifically designed to promote shape biased models.
+
+\subsubsection{SIN \textrightarrow  SIN}
+This training scheme yields fairly good results. This shows that the model is capable to learn
+and generalize on the stylised dataset.
+
+\subsubsection{SIN \textrightarrow  IN}
+
+This training scheme yields inferior results than IN \textrightarrow  IN, however
+there are much better than IN \textrightarrow  SIN. 
+
+This demonstrates that a shape-biased model generalizes better than texture biased models.
 
 \subsection{Shape-ResNet}
 
-JOINTLY ON SIN IN AND FINETUNE
+\subsubsection{SIN + IN \textrightarrow  IN}
+
+\subsubsection{SIN + IN + finetune(IN) \textrightarrow  IN}
+
 
 \subsection{Noise resistance}
 
