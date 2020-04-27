@@ -258,23 +258,24 @@ TODO MAYBE ?
 \newpage
 \section{Experiments}
 
-For all , SIN and IN represent Stylized-Imagenette and Imagenette datasets respectively.
+For all of our experiments, SIN and IN represent Stylized-Imagenette-160 and Imagenette-160 datasets respectively.
 For example, the nomenclature IN \texorpdfstring{\textrightarrow} .IN signifies that the 
 model was trained on IN and tested on IN.
-IN and SIN have the same image ids for their testing set, only the stylization changes.
+The two datasets have the same image identifiers for their testing set, only the stylization changes.
 
 \subsection{Texture bias hypothesis}
+
 The first experiment conducted by the authors was to validate the texture bias 
 through image classification on handpicked stylized subsets. 
 Their hypothesis was that the re-texturized image would be classified as the texture representation, rather than 
-the underlying content using the shapes, which would be contrary to popular belief. \smallskip
+the underlying content using the shapes, which would be contrary to popular belief. \medskip \par
 
 \noindent
 We've reproduced their experiment using the picture of an English Springer as our content image (a), 
 a colorful parachute as our texture image (b),
 and a stylized version of the Springer (c) using AdaIN style transfer 
 (Huang \& Belongie, 2017) % TODO: ADD REFERENCE TO STYLE TRANSFER
-to introduce a texture-shape cue conflicts. \smallskip
+to introduce a texture-shape cue conflicts. \medskip \par
 
 \noindent
 The classification results after training the resnet-18 on the imagenette-160 dataset 
@@ -600,55 +601,7 @@ is more important than image classification could be interesting.
 
 This is where we conclude bois hjf
 
-% To begin with, we reproduced the first experiment of the paper. This experiment
-% is represents the misconception we have about how CNNs learn.
-
-% Figure Mehdi
-
-% We can see that the pretrained CNN recognized the elephant with just its texture.
-% More interestingly, it recognized it classified the cat shape with elephant texture as an elephant.
-% The texture hypothesis is more likely to be true.
-% Let's define more robust experiments to verify that.
-
-% \newpage
-% \subsection{Texture bias of CNNs}
-
-% General explanation
-
-% \subsubsection{IN to IN}
-% expected results
-% \subsubsection{SIN to IN}
-% expected results
-
-% \subsection{Dataset}
-
-% Details on dataset creation
-
-% \subsection{Resistance to noise}
-
-% Experiences Abder
-% Data generation
-
-% \subsection{Training}
-
-% Details of ResNet model
-% Hyperparams
-% Nb Epochs
-% FineTuning method
-
-% \section{Results}
-
-% \subsection{Texture bias of CNNs}
-
-% \subsection{Resistance to noise}
-
-
-% \section{Discussion}
-
-% \subsection{Texture bias of CNNs}
-
-% \subsection{Resistance to noise}
-
+\newpage
 \appendix
 
 %% The file named.bst is a bibliography style file for BibTeX 0.99c
