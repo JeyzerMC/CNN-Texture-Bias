@@ -23,6 +23,8 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage{epstopdf}
+\usepackage{makecell}
+\usepackage{float}
 \urlstyle{same}
 
 % the following package is optional:
@@ -282,60 +284,172 @@ from its shape this time around, having no texture clue to learn from.
 \subsection{Robustness of shape-based representations}
 
 We reproduce the 4 experiments of the paper to prove the robustness of a shape-biased CNN.
-Here, SIN and IN represent the Stylized-Imagenette the Imagenette dataset respectively.
+Here, SIN and IN represent Stylized-Imagenette and Imagenette datasets respectively.
 
-\begin{table}
-  \begin{tabular}{|l|l|l|l|l|}
-  \hline
+\begin{table}[h!]
+  \begin{tabular}{lllll}
+  \Xhline{2\arrayrulewidth}
   Architecture & IN\_IN & SIN\_SIN & IN\_SIN & SIN\_IN \\ \hline
-  ResNet-18    & 0.9    & 0.8      & 0.3     & 0.6     \\ \hline
+  ResNet-18    & 0.9    & 0.8      & 0.3     & 0.6     \\ \Xhline{2\arrayrulewidth}
   \end{tabular}
+  \caption{Accuracy of ResNet18 model on different tests}
 \end{table}
 
-\subsubsection{IN \texorpdfstring{\textrightarrow} IIN}
+
+\subsubsection{IN \texorpdfstring{\textrightarrow} .IN}
 A model trained on IN and tested on IN is the usual training scheme used in the literature.
 It yields competitive results, as we already now.
 
+\begin{figure}[h!]
+  \includegraphics[width = 0.45\textwidth]{imgs/in/in-in/in-in_confusion_matrix_0.963.eps}
+  \caption{Confusion Matrix of IN \texorpdfstring{\textrightarrow} .IN}
+\end{figure}
 
-\subsubsection{IN \texorpdfstring{\textrightarrow} SSIN}
-The original paper trained a model on IN and tested it on SIN which yielded poor results as 
+\subsubsection{IN \texorpdfstring{\textrightarrow} .SIN}
+
+The original paper trained a model on IN and tested it on SIN which yielded poor results (see Fig.\ref{fig:cm_in-sin}) as 
 the model is texture biased, and the SIN dataset is specifically designed to promote shape biased models.
 
-\subsubsection{SIN \texorpdfstring{\textrightarrow} SSIN}
-This training scheme yields fairly good results. This shows that the model is capable to learn
-and generalize on the stylised dataset.
+\begin{figure}[h!]
+  \includegraphics[width = 0.45\textwidth]{imgs/in/in-sin/in-sin_confusion_matrix_0.313.eps}
+  \caption{Confusion Matrix of IN \texorpdfstring{\textrightarrow} .IN}
+  \label{fig:cm_in-sin}
+\end{figure}
 
-\subsubsection{SIN \texorpdfstring{\textrightarrow} IIN}
+\subsubsection{SIN \texorpdfstring{\textrightarrow} .SIN}
+This training scheme yields fairly good results. This shows that the model is capable to learn
+and generalize on the stylized dataset.
+
+\begin{figure}[h!]
+  \includegraphics[width = 0.45\textwidth]{imgs/in/in-sin/in-sin_confusion_matrix_0.313.eps}
+  \caption{Confusion Matrix of IN \texorpdfstring{\textrightarrow} .IN}
+\end{figure}
+
+\subsubsection{SIN \texorpdfstring{\textrightarrow} .IN}
 
 This training scheme yields inferior results than IN \texorpdfstring{\textrightarrow} IIN, however
-there are much better than IN \texorpdfstring{\textrightarrow} _SIN. 
-
+there are much better than IN \texorpdfstring{\textrightarrow} .SIN.
 This demonstrates that a shape-biased model generalizes better than texture biased models.
 
 \subsection{Shape-ResNet}
 
-\subsubsection{SIN + IN \texorpdfstring{\textrightarrow} IIN}
+\subsubsection{SIN + IN \texorpdfstring{\textrightarrow} .IN}
 
-\subsubsection{SIN + IN + finetune(IN) \texorpdfstring{\textrightarrow} IIN}
+Mixing the 2 datasets has the effect of data augmentation. The model will be better
+at generalizing. The results are better than the SIN-only, but worse that IN-only training.
+We can interpret these results by the fact IN-only training overfit a lot on texture.
 
+\subsubsection{SIN + IN + finetune(IN) \texorpdfstring{\textrightarrow} .IN}
+
+This method yields the best results, and seem to be the more robust. The finetuning only occurs
+on the last layers of the ResNet (the classification layers) and not the feature extracting layers.
+Hence, the model does not overfit on textures, but is better to better classify images.
 
 \subsection{Noise resistance}
 
-EXPERIENCE ABOUDELOU
 
+One of the major finding in the original paper was that the model trained with a shape bias had developed a better resistance to distortions than the regular model.
+A model trained to recognize textures should behave differently from one trained to recognize shapes on a noised data set.  The key idea is that not all types of distortions are the same and this model should in theory only be resistant to some of them.  We decided to focus on 3 main types of distortions.  A uniform noise, a high pass filter and a low pass filter.
+
+The result of the original paper show us that the SIN model has a better resistance to uniform noise, high pass filtered image and a worse resistance to low pass filtered images.
+This makes sense since a uniform noise has a much worse effect on texture than overall shape. Also, a high pass filter acts as a contour amplifier thus making the shape in the image more prominent. In the same line of thought, a low pass filter has the opposite effect, blurring the edges of an image and making it's shape much less discernible.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width = 0.25\textwidth]{imgs/image_uniform}
+\caption{uniform noise}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width = 0.25\textwidth]{imgs/image_high}
+\caption{high pass}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width = 0.25\textwidth]{imgs/image_low}
+\caption{low pass}
+
+\end{figure}
+
+\subsubsection{experiment}
+
+We decided to reproduce this experiment with our own data.
+All of the distorted data sets are created form the regular imagenette data set. We applied the distortions at different scale gradually increasing the effect on the images.
+
+We then compared the results of our three trained models against those different noise levels.
+The models were the regular resnet trained on imagenette (IN), a resnet trained on a stylised version of imagenette (SIN) and one trained on a combination of this data (SIN+IN).
+Each model was given the same test set on which a gradually increasing noise was applied and an accuracy was computed.
+
+The different level of noise were chosen arbitrarily to create different enough distortions. The original values and algorithms used in the paper were not available.
+
+\subsubsection{results}
+
+In all of the test we conducted, the SIN model always start off worse. This is to be expected because it was trained on stylised images and the test set for the distorted images is based on regular images. The IN and SIN+IN model start at about the same accuracy.
+
+\begin{figure}[h!]
+\centering
 \includegraphics[width = 0.45\textwidth]{imgs/uniform}
+\caption{Uniform noise}
+\end{figure}
 
-\includegraphics[width = 0.45\textwidth]{imgs/sin/loss.eps}
+\begin{figure}[h!]
+\centering
+\includegraphics[width = 0.45\textwidth]{imgs/high_pass}
+\caption{High noise}
+\end{figure}
 
-\newpage
+\begin{figure}[h!]
+\centering
+\includegraphics[width = 0.45\textwidth]{imgs/low_pass}
+\caption{Low pass}
+\end{figure}
+
+The figures clearly show the shape biased models have a better resistance to noise the regular model.
+
+We were surprised by the results for two reasons.
+First, the SIN model started off at a worse accuracy, so we were expecting to compare the resistance to distortions as a relative drop from the original accuracy but it managed to have a better absolute accuracy than the regular model.
+Secondly, we were expecting the SIN model to under perform in the low pass area, but it managed to be better than the IN model. This goes against the results of the original paper and against common sense. It is possible the levels of blur applied were either too strong or not enough
+
 \section{Approach analysis}
 
-Limites de notre approches
+\subsection{Dataset}
 
-\newpage
+We used the same data as the authors: we didn't have time
+to find another image classification dataset that fitted our needs.
+Many of the datasets we found online were poorly anotated, or the images
+were too large.
+
+CIFAR-10's quality was to poor to do style transfer.
+%  (include figure in /imgs/dataset_comparison)
+
+The original Imagenet dataset had too many classes and too many images.
+
+It would be interesting to test this approach on a completely different dataset.
+
+\subsection{Results}
+
+Overall, we were able to reproduce their results and
+even surpass them. This can be justified by the fact that the classes
+in Imagenette were handpicked to be easily classified, and that there were less 
+classes than Imagenet.
+
+\subsection{Experiments}
+
+We only reproduced experiments that yielded interesting results 
+in the original paper. We can see the excellent quality of the work, 
+because their experiments were easily reproducable, and most of the 
+steps were clearly explained.
+
+\subsection{Ideas for future studies}
+
+Testing this robustness in related areas were shape bias (like image segmentation) 
+is more important than image classification could be interesting.
+
 \section{Conclusion}
 
-This is where we conclude bois
+This is where we conclude bois hjf
 
 % To begin with, we reproduced the first experiment of the paper. This experiment
 % is represents the misconception we have about how CNNs learn.
@@ -386,8 +500,6 @@ This is where we conclude bois
 
 % \subsection{Resistance to noise}
 
-
-\newpage
 \appendix
 
 %% The file named.bst is a bibliography style file for BibTeX 0.99c
