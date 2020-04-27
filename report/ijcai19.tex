@@ -238,6 +238,13 @@ This pretrained architecture uses a VGG-19 network to encode the content and sty
 An AdaIN layer is then used to perform style transfer in the feature space.   
 A Decoder then decodes the AdaIN output to image space.
 
+\subsection{Metrics}
+
+We decided to only use Accuracy, as our class are balanced, and not too numerous.
+
+Top-k accuracy is a useful metric when there is a lot of classes to predict. Our dataset only
+contains 10 classes, so we deemed it wasn't necessary to introduce this metric.
+
 \subsection{ResNet}
 
 TODO
@@ -257,6 +264,11 @@ TODO MAYBE ?
 
 \newpage
 \section{Experiments}
+
+For all , SIN and IN represent Stylized-Imagenette and Imagenette datasets respectively.
+For example, the nomenclature IN \texorpdfstring{\textrightarrow} .IN signifies that the 
+model was trained on IN and tested on IN.
+IN and SIN have the same image ids for their testing set, only the stylization changes.
 
 \subsection{Texture biais hypothesis}
 The first experiment conducted by the authors was to validate the texture biais 
@@ -306,21 +318,24 @@ available on the github repository, under the section Test-Visualisation.
 
 \subsection{Training Procedure}
 
+
 \subsubsection{Global Parameters}
 
-\textbf{Number of epochs}: For our experiments, we did a fixed number of epochs (15) because it did not overfit, nor underfit the data too much.
-\begin{figure}[h!]
+\textit{Number of epochs}: For our experiments, we did a fixed number of epochs
+ (15) because it did not overfit, nor underfit the data too much (Fig. \ref{loss_in}).
+
+ \begin{figure}[h!]
   \includegraphics[width = 0.45\textwidth]{imgs/sin/loss}
   \caption{Loss of training on IN \texorpdfstring{\textrightarrow} .IN}
   \label{loss_in}
 \end{figure}
 
-\textbf{Learning rate}: We used FastAI's "lr finder" to tune our learning rate.
+\textit{Learning rate}: We used FastAI's "lr finder" (Fig. \ref{lr_finder}) to tune our learning rate.
 We fixed the maximum learning rate at 1e-2 by looking at the learning rate space search graph.
 \begin{figure}[h!]
   \includegraphics[width = 0.45\textwidth]{imgs/lr_find.eps}
-  \caption{Learning rate finder\texorpdfstring{\textrightarrow} .IN}
-  \label{loss_in}
+  \caption{Learning rate finder IN \texorpdfstring{\textrightarrow} .IN}
+  \label{lr_finder}
 \end{figure}
 
 \subsubsection{Experiment-specific parameters}
@@ -337,14 +352,15 @@ We defined the max learning rate at 1e-4.
 
 \subsection{Robustness of shape-based representations}
 
-We reproduce the 4 experiments of the paper to prove the robustness of a shape-biased CNN.
-Here, SIN and IN represent Stylized-Imagenette and Imagenette datasets respectively.
+We reproduce the 4 experiments of the paper to prove the robustness of a shape-biased CNN
+(the CNN trained on SIN),
+and show the fragility of the texture biased CNN (the CNN trained on IN). 
 
 \begin{table}[h!]
   \begin{tabular}{lllll}
   \Xhline{2\arrayrulewidth}
-  Architecture & IN\_IN & SIN\_SIN & IN\_SIN & SIN\_IN \\ \hline
-  ResNet-18    & 0.963    & 0.908      & 0.3     & 0.6     \\ \Xhline{2\arrayrulewidth}
+  Architecture & IN\texorpdfstring{\textrightarrow} .IN & SIN\texorpdfstring{\textrightarrow} .SIN & IN\texorpdfstring{\textrightarrow} .SIN & SIN\texorpdfstring{\textrightarrow}.IN \\ \hline
+  ResNet-18    & \textbf{0.963}     & 0.908      & 0.313     & 0.624     \\ \Xhline{2\arrayrulewidth}
   \end{tabular}
   \caption{Accuracy of ResNet18 model on different tests}
 \end{table}
@@ -397,11 +413,26 @@ This demonstrates that a shape-biased model generalizes better than texture bias
 
 \subsection{Shape-ResNet}
 
+Now that we demonstrated the excellent generalization capabilites of shape biased models,
+our goal is to surpass the performance of the IN \texorpdfstring{\textrightarrow} .IN model.
+\textbf{All the following models are evaluated on the IN dataset.}
+
+\begin{table}[h!]
+  \begin{tabular}{lllll}
+  \Xhline{2\arrayrulewidth}
+  Architecture & IN & SIN+SIN  & SIN + IN + finetune(IN) \\ \hline
+  ResNet-18    & 0.963    & 0.973   & \textbf{0.974}    \\ \Xhline{2\arrayrulewidth}
+  \end{tabular}
+  \caption{Accuracy of ResNet18 model on IN test set}
+\end{table}
+
+
 \subsubsection{SIN + IN \texorpdfstring{\textrightarrow} .IN}
 
-Mixing the 2 datasets has the effect of data augmentation. The model will be better
-at generalizing. The results are better than the SIN-only, but worse that IN-only training.
-We can interpret these results by the fact IN-only training overfit a lot on texture.
+Mixing the 2 datasets has the effect of a data augmentation. The model will be better
+at generalizing (Fig. \ref{cm_sinin-in}). The performance improvement as a result of data augmentation 
+is well known. However, this data augmentation is dedicated to increase shape bias,
+and does not make the model overfit.
 
 \begin{figure}[h!]
   \includegraphics[width = 0.45\textwidth]{imgs/sinin/sinin-in_confusion_matrix_0.973.eps}
@@ -411,7 +442,7 @@ We can interpret these results by the fact IN-only training overfit a lot on tex
 
 \subsubsection{SIN + IN + finetune(IN) \texorpdfstring{\textrightarrow} .IN}
 
-This method yields the best results (Fig. \ref{cm_sinin-in-finetune}), and seem to be the more robust. The finetuning only occurs
+This method yields the best results (Fig. \ref{cm_sinin-in-finetune}) The finetuning only occurs
 on the last layers of the ResNet (the classification layers) and not the feature extracting layers.
 Hence, the model does not overfit on textures, but is better to better classify images.
 
@@ -539,6 +570,11 @@ Overall, we were able to reproduce their results and
 even surpass them. This can be justified by the fact that the classes
 in Imagenette were handpicked to be easily classified, and that there were less 
 classes than Imagenet.
+Our results fluacted a bit between different training. For example, finetuning does not seem to be necessary 
+in our study. However, when the performance of SIN + IN is sometimes lower than 0.9. In this scenario, finetuning
+always surpassed IN \texorpdfstring{\textrightarrow} .IN.
+To correct this, we could have calculated our accuracy on the average of five runs, like the auhors of Imagenette \cite{fastai2019}
+suggested.
 
 \subsection{Experiments}
 
