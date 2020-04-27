@@ -132,8 +132,9 @@ Another paper showed that vision was hierachical. Low-level features, such as li
 were combined together to recognize high level concepts, like wheels, windows, etc. 
 The famous Neocognition paper \cite{neocognitron} was the implementation of the idea of hierachical vision.
 This multilayered neural network included convolutional layers with wheighted receptive fields (filters).
-It was the first deep neural network.
+It was the first deep neural network. \smallskip
 
+\noindent
 The first modern convnet was LeNet \cite{Lecun98gradient-basedlearning}
 It used backpropgation to automatically learn the filter values to extract meaningful features in images hierachically.
 All the modern ConvNets are inspired from this network.
@@ -209,8 +210,10 @@ This ensured that the texture of a stylized image had no correlation with its or
 
 \noindent
 We used the implementation of AdaIN-style \cite{huang2017arbitrary} made by \cite{stylizeddatasets2019}.
-
-\includegraphics[width=0.45\textwidth]{imgs/adain_architecture}
+\begin{figure}[h!]\center
+  \includegraphics[width=0.45\textwidth]{imgs/adain_architecture}
+  \caption{AdaIn style transfer network.}
+\end{figure}
 
 AdaIN-style is the first real-time style transfer algorithm than can transfer arbitrary new styles.
 That means that we can stylize an image with any texture image we want.
@@ -234,20 +237,7 @@ TODO MAYBE ?
 \newpage
 \section{Experiments}
 
-The authors of the original paper trained multiple models, 
-namely Resnet-50, BagNet-33, BagNet-17 and BagNet-9
-
-MODELS
-TEXTURES
-DATASETS
-
-
-
 \subsection{Texture biais hypothesis}
-% The first experiment of this analysis was to reproduce the original experiment of the paper with imagenette-160 
-% and handpicked images and textures. 
-% We then trained a ResNet-18 to classify the chosen images and visualize the results.
-% Figure 1 below shows the result of classification for a content image (a), texture image (b) and stylized image (c).
 
 The first experiment conducted by the authors was to validate the texture biais 
 through image classification on handpicked stylized subsets. 
@@ -262,7 +252,8 @@ and a stylized version of the Springer (c) using AdaIN style transfer
 to introduce a texture-shape cue conflicts. \smallskip
 
 \noindent
-The classification results after training the resnet-18 on the imagenette-160 dataset can be seen on figure 1.
+The classification results after training the resnet-18 on the imagenette-160 dataset 
+can be seen on figure \ref{fig:dog-parachute}.
 We've obtained probabities in line with what was suggested by the authors, 
 where the stylized image was recognized as a parachute, 
 due to the texture biais, rather than an English Springer.
@@ -270,22 +261,30 @@ due to the texture biais, rather than an English Springer.
 \begin{figure}[h!]\center
   \includegraphics[width=0.47\textwidth]{imgs/results-textures}
   \caption{Classification results after training on imagenette-160.}
+  \label{fig:dog-parachute}
 \end{figure}
 
 \noindent
 Retraining the model on the stylized imagenette-160 dataset with the same parameters 
-(resnet-18, 20 epochs, 2e-2 learning rate), led to classification probabities available in figure 2.
+(resnet-18, 20 epochs, 2e-2 learning rate), 
+led to classification probabities available in figure \ref{fig:stylized-dog-parachute}.
 As expected, and although the results are a bit less accurate than on the original model, 
 we get the correct class prediction for the stylized image, suggesting that our CNN recognized the object
 from its shape this time around, having no texture clue to learn from.
-
 
 \textbf{TODO: FINISH FIGURE 2 AND PUT HERE}
 
 \begin{figure}[h!]\center
   \includegraphics[width=0.47\textwidth]{imgs/results-textures}
   \caption{Classification results with stylized imagenette-160.}
+  \label{fig:stylized-dog-parachute}
 \end{figure}
+
+\noindent
+The results of this experiment are also available in the dog-parachute notebook, 
+available on the github repository, under the section Test-Visualisation.
+
+\textbf{TODO: ADD LINK TO GITHUB EXPERIMENT FOR ABOVE.}
 
 \subsection{Training Procedure}
 
