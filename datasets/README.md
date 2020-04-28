@@ -1,6 +1,6 @@
 # Datasets used for the experiments.
 
-### Please note that those datasets are not ours.
+### Please note that these datasets are not ours.
 
 ## Textures 
 
