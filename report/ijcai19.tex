@@ -254,27 +254,26 @@ contains 10 classes, so we deemed it wasn't necessary to introduce this metric.
 
 \subsection{ResNet}
 
-The authors of the original papers used ResNet-50 
-alongside with other variants of the model in their experiments. 
+The authors of the original article used ResNet-50 and 
+other variants of the model in their experiments. 
 Due to the great computational cost of training such behemoths, 
 we've settled with a more modest ResNet-18 to fit our time constraints and smaller dataset. \medskip \par
 
 \noindent
 ResNet is based on the idea that stacking layers in a CNN should not degrade the network performance,
-because any unecessary layer could in theory be simplified 
+because any unnecessary layer could in theory be simplified 
 to an identity function that wouldn't change anything. \medskip \par
 
 \noindent
-We know, however, that due in part to the infamous vanishing gradient problem, 
-where the gradient becomes smaller and smaller as multiplications are stacked during backpropagation, 
-this is not the case. 
-A network with a large number of layers is also more prone to overfit, 
-if trained with sufficient data, due to the increased number of parameters. \medskip \par
+However, this is not the case in regular CNNs because of the vanishing gradients, 
+where the gradient becomes smaller and smaller as multiplications are stacked during backpropagation.
+Moreover, a network with a large number of layers is also more prone to overfit, 
+if trained with sufficient data because it has too much parameters. \medskip \par
 
 \noindent
-What's more, learning the identity function is a hard task for a neural network to do. 
-Most of the time, neurons will, at best, approximate the identity function, 
-which would lead to an increasing decay as layers are added to the network. \medskip \par
+Furthermore, learning the identity function is a hard task for a neural network. 
+Most of the time, neurons will, approximate the identity function at best, 
+which would lead to an increasing error as layers are added to the network. \medskip \par
 
 \noindent
 The authors of ResNet, \cite{resnet2015}, proposed a ground-breaking solution to the problem, 
@@ -726,7 +725,7 @@ Thirdly, the data set only contains 10 classes as opposed to Imagenet who has 20
 \noindent
 We experimented with other data sets to solve these issues, but ended up rejecting them for various reasons. The cifar10 data set's images were too low resolutions and we found the AdaIn model could not stylise them.
 The original Imagenet dataset was too voluminous and the training time was too long to enable us to experiment.
-Ultimately, we decided to remain with Imagenette and it's limitations. \medskip \par
+Ultimately, we decided to remain with Imagenette and its limitations. \medskip \par
 
 \noindent
 The number of images reduced out training time, but also reduced the size of the test set, thus giving us less confidence in our metrics.
@@ -768,7 +767,7 @@ Testing this robustness in related areas where shape bias is more important than
 \section{Conclusion}
 
 We were able to replicate most of the experiences of the original paper and reach the same results.
-Our experiments showed that training a network with a combination of regular and stylised images increased its classification performance and robustness to disturbances.
+Our experiments showed that training a network with a combination of regular and stylized images increased its classification performance and robustness to disturbances.
 This show a clear advantage for models that have a strong shape bias. \medskip \par
 
 \noindent
