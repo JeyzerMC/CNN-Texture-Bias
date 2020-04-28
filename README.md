@@ -4,6 +4,7 @@ Experiment of the texture biais of CNNs and shift to shape biais with style tran
 # Original paper link
 
 https://openreview.net/pdf?id=Bygh9j09KX
+
 # Folders
  ## Notebooks to look at
     - stylize-dataset.ipynb: use to apply style transfer on our dataset
