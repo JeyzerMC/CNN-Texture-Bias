@@ -732,7 +732,7 @@ Ultimately, we decided to remain with Imagenette and it's limitations. \medskip 
 The number of images reduced out training time, but also reduced the size of the test set, thus giving us less confidence in our metrics.
 The lower resolution also helped our experimentation velocity by decreasing the training time, 
 but it may have had an effect on the resistance to noise experiment. 
-It is possible that noise applied to low resolution images has a different effect. \medskip \par
+It is entirely possible that noise applied to low resolution images would have a different effect. \medskip \par
 
 \noindent
 The fact that we only have 10 classes was helpful when we were visualising our confusion matrices but rendered one of our metric, top k accuracy, completely, unusable. The top k accuracy was used in the original paper as the top 5 accuracy on a dataset with 200 classes. It is meaningless to have a top 5 accuracy in a 10 classes dataset and reducing there is no k value for which this metric would start to be meaningful.
