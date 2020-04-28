@@ -607,34 +607,42 @@ It is possible the levels of blur applied were too strong for the IN model to de
 
 \section{Approach analysis}
 
+The original scope of our project was to try to reproduce the findings in the reference paper.
+We approached the subject with goal of of validating a simple thesis. Models can be induced with a shape bias during their training by changing the input data and this shape bias can have numerous advantages.
+We would like to think that we achieved this goal, but there were some shortcomings in our methods that may have impacted our results and we would like to clarify their causes and possible effects.
+
+\subsection{Experiments}
+
+The first liberty we took was to only replicate a subset of the experiments of the paper.
+We can see the excellent quality of the work, 
+because their experiments were easily reproducible, and most of the 
+steps were clearly explained.
+Some of the experiment in the original paper were purely exploratory and we felt did not contribute our main thesis. As an example, we did not choose to test if human vision had an inherent shape bias as it has been a widely idea and outside our scope.
+
+Also, a lot of the experiments comparing the models against transformed test sets used transformations that we felt were a bit redundant. Some of these transformations like a silhouette detector and a gray scale version of the image were not as important as the different disturbances we introduced.
+We don't feel like omitting to reproduce these experiments weakened our thesis.\\
+
 \subsection{Dataset}
 
-As mentionned in the first section, we've used a subset of 
-the same dataset the authors used in their experiment. 
-Indeed, we didn't have much time to find another image classification dataset that fitted our needs.
-Many of the datasets we found online were poorly anotated, or the images
-were too large. \medskip \par 
+Most of the experiments depend on comparing two identical models trained on two versions of the same data set. One version left intact and another that saw stylised using the AdaIn model.
 
-\noindent
-The original Imagenet dataset had too many classes and a large number of images (over 14M), 
-which would take way too long to train. 
-We also did not have the physical storage capacities for this dataset. \medskip \par 
+This is were we took most of our liberties because of our time and resources constraints.
+The data set we chose to use for was Imagenette, a subset of the Imagenet data set.
+This data set is limited by many factors. First, the number of images is considerably inferior to imagenet. Secondly, the images have lower resolution. 160 by 160 pixels in the Imagenette variant we used. Thirdly, the data set only contains 10 classes as opposed to Imagenet who has 200.
 
-\noindent
-On the other hand, CIFAR-10's images quality was too poor 
-to obtain nice results on our style transfer procedure. \medskip \par 
+We experimented with other data sets to solve these issues, but ended up rejecting them for various reasons. The cifar10 data set's images were too low resolutions and we found the AdaIn model could not stylise them.
+The original Imagenet dataset was too voluminous and the training time was too long to enable us to experiment.
+Ultimately, we stayed with Imagenette and it's limitations.
 
-\noindent
-We've also experimented quickly with the Natural Images dataset \cite{natural-images}, 
-but promising results that were obtained in parallele using the smaller version of imagenette, 
-imagenette-160, led us to focus on this dataset for the rest of our experiments. \medskip \par 
+The number of images reduced out training time, but also reduced the size of the test set, thus giving us less confidence in our metrics.
+The lower resolution also helped our experimentation velocity by decreasing the training time, but it may have had an effect on the resistance to noise experiment. It is possible that noise applied to low resolution images has a different effect.
+The fact that we only have 10 classes was helpful when we were visualising our confusion matrices but rendered one of our metric, top k accuracy, completely, unusable. The top k accuracy was used in the original paper as the top 5 accuracy on a dataset with 200 classes. It is meaningless to have a top 5 accuracy in a 10 classes dataset and reducing there is no k value for which this metric would start to be meaningful.
 
-\noindent
-It would be interesting, as a next step, to test this approach on the Natural Images dataset,
-or completely different dataset altogether and validate the results on those ones.
+\subsection{Models}
 
-% TODO
-%  (include figure in /imgs/dataset_comparison)
+The last divergence we took from the paper was our choice of models. The authors compared the effect of shape bias on 4 model architectures. Granted all of these models were slight variations of the ResNet-50, the variation of models add wight to their experiments.
+
+In our case, we focused out training on ResNet-18. This model has a lot less parameters and is faster to train. Taking into consideration the fact that our images are of lower resolution we decided this architecture was powerful enough.
 
 \subsection{Results}
 
@@ -642,30 +650,27 @@ Overall, we were able to reproduce their results and
 even surpass them. This can be justified by the fact that the classes
 in Imagenette were handpicked to be easily classified, and that there were less 
 classes than Imagenet.
-Our results fluacted a bit between different training. For example, finetuning does not seem to be necessary 
-in our study. However, when the performance of SIN + IN is sometimes lower than 0.9. In this scenario, finetuning
+Our results fluacted a bit between different training. For example, fine tuning does not seem to be necessary 
+in our study. However, when the performance of SIN + IN is sometimes lower than 0.9. In this scenario, fine tuning
 always surpassed IN \texorpdfstring{\textrightarrow} .IN. \medskip \par 
 
 \noindent
-To correct this, we could have calculated our accuracy on the average of five runs, like the auhors of Imagenette \cite{fastai2019}
+To correct this, we could have calculated our accuracy on the average of five runs, like the authors of Imagenette \cite{fastai2019}
 suggested.
-
-\subsection{Experiments}
-
-We only reproduced experiments that yielded interesting results 
-in the original paper. We can see the excellent quality of the work, 
-because their experiments were easily reproducable, and most of the 
-steps were clearly explained.
 
 \subsection{Ideas for future studies}
 
-Testing this robustness in related areas where shape bias
-is more important than image classification, like for example in image segmentation,
-could prove to be quite interesting.
+Testing this robustness in related areas where shape bias is more important than image classification, like for example in image segmentation, could prove to be quite interesting.
 
+\newpage
 \section{Conclusion}
 
-This is where we conclude bois hjf
+We were able to replicate most of the experiences of the original paper and arrive at the same results.
+Our experiments showed that training a network with a combination of regular and stylised images increased its classification performance and robustness to disturbances.
+This show a clear advantage of models that have a strong shape bias.
+
+This is encouraging as it show that we are getting closer to understanding what is learned by out models. It's also interesting to know that we can introduce biases into our model by transforming the data we feed into it.
+
 
 \newpage
 \appendix
