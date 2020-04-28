@@ -7,6 +7,10 @@ This experiment was an analysis of the paper 'IMAGENET-TRAINED CNNS ARE BIASED T
 TEXTURE; INCREASING SHAPE BIAS IMPROVES ACCURACY AND ROBUSTNESS', available here:
 https://openreview.net/pdf?id=Bygh9j09KX
 
+We did not write the original paper, this repository is a student reproduction of the experiments 
+described by the article in order to gain knowledge in the field and practice scientific writting. 
+The report is not meant to be published.
+
 # Folders
  ## Notebooks to look at
     - stylize-dataset.ipynb: use to apply style transfer on our dataset
