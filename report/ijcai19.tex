@@ -22,7 +22,7 @@
 \usepackage{booktabs}
 \usepackage{algorithm}
 \usepackage{algorithmic}
-\usepackage{epstopdf}
+% \usepackage{epstopdf}
 \usepackage{makecell}
 \usepackage{float}
 \urlstyle{same}
@@ -617,23 +617,27 @@ The first liberty we took was to only replicate a subset of the experiments of t
 We can see the excellent quality of the work, 
 because their experiments were easily reproducible, and most of the 
 steps were clearly explained.
-Some of the experiment in the original paper were purely exploratory and we felt did not contribute our main thesis. As an example, we did not choose to test if human vision had an inherent shape bias as it has been a widely idea and outside our scope.
+Some of the experiment in the original paper were purely exploratory and we felt did not contribute our main thesis. As an example, we did not choose to test if human vision had an inherent shape bias as it has been a widely idea and outside our scope. \medskip \par
 
+\noindent
 Also, a lot of the experiments comparing the models against transformed test sets used transformations that we felt were a bit redundant. Some of these transformations like a silhouette detector and a gray scale version of the image were not as important as the different disturbances we introduced.
 We don't feel like omitting to reproduce these experiments weakened our thesis.\\
 
 \subsection{Dataset}
 
-Most of the experiments depend on comparing two identical models trained on two versions of the same data set. One version left intact and another that saw stylised using the AdaIn model.
+Most of the experiments depend on comparing two identical models trained on two versions of the same data set. One version left intact and another that saw stylised using the AdaIn model. \medskip \par 
 
+\noindent
 This is were we took most of our liberties because of our time and resources constraints.
 The data set we chose to use for was Imagenette, a subset of the Imagenet data set.
-This data set is limited by many factors. First, the number of images is considerably inferior to imagenet. Secondly, the images have lower resolution. 160 by 160 pixels in the Imagenette variant we used. Thirdly, the data set only contains 10 classes as opposed to Imagenet who has 200.
+This data set is limited by many factors. First, the number of images is considerably inferior to imagenet. Secondly, the images have lower resolution. 160 by 160 pixels in the Imagenette variant we used. Thirdly, the data set only contains 10 classes as opposed to Imagenet who has 200. \medskip \par 
 
+\noindent
 We experimented with other data sets to solve these issues, but ended up rejecting them for various reasons. The cifar10 data set's images were too low resolutions and we found the AdaIn model could not stylise them.
 The original Imagenet dataset was too voluminous and the training time was too long to enable us to experiment.
-Ultimately, we stayed with Imagenette and it's limitations.
+Ultimately, we stayed with Imagenette and it's limitations. \medskip \par 
 
+\noindent
 The number of images reduced out training time, but also reduced the size of the test set, thus giving us less confidence in our metrics.
 The lower resolution also helped our experimentation velocity by decreasing the training time, but it may have had an effect on the resistance to noise experiment. It is possible that noise applied to low resolution images has a different effect.
 The fact that we only have 10 classes was helpful when we were visualising our confusion matrices but rendered one of our metric, top k accuracy, completely, unusable. The top k accuracy was used in the original paper as the top 5 accuracy on a dataset with 200 classes. It is meaningless to have a top 5 accuracy in a 10 classes dataset and reducing there is no k value for which this metric would start to be meaningful.
@@ -667,8 +671,9 @@ Testing this robustness in related areas where shape bias is more important than
 
 We were able to replicate most of the experiences of the original paper and arrive at the same results.
 Our experiments showed that training a network with a combination of regular and stylised images increased its classification performance and robustness to disturbances.
-This show a clear advantage of models that have a strong shape bias.
+This show a clear advantage of models that have a strong shape bias. \medskip \par 
 
+\noindent
 This is encouraging as it show that we are getting closer to understanding what is learned by out models. It's also interesting to know that we can introduce biases into our model by transforming the data we feed into it.
 
 
