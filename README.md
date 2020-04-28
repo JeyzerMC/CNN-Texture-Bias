@@ -1,8 +1,10 @@
 # CNN-Texture-Bias
+## TP4 INF8225 H20 - Polytechnique Montreal
 Experiment of the texture biais of CNNs and shift to shape biais with style transfer 
 
 # Original paper link
-
+This experiment was an analysis of the paper 'IMAGENET-TRAINED CNNS ARE BIASED TOWARDS
+TEXTURE; INCREASING SHAPE BIAS IMPROVES ACCURACY AND ROBUSTNESS', available here:
 https://openreview.net/pdf?id=Bygh9j09KX
 
 # Folders
