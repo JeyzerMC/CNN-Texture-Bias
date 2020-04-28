@@ -244,7 +244,7 @@ A Decoder then decodes the AdaIN output to image space.
 
 We decided to only use the multi-class Accuracy, as our class are balanced, and not too numerous. \medskip \par
 
-$ Accuracy = \frac{TP + TN}{TP + TN + FP + FN}  $ \medskip \par
+$$ Accuracy = \frac{TP + TN}{TP + TN + FP + FN}  $$ \medskip \par
 
 \noindent
 where TP is the True Positives, TN is True Negatives, FP is the sum of the False Positives
@@ -258,18 +258,18 @@ contains 10 classes, so we deemed it wasn't necessary to introduce this metric.
 
 TODO
 
-\subsubsection{Loss Function}
+\subsubsection{Loss Function} % ADAM ETC? 
 
 \subsubsection{Optimisation Function}
 
 
-\subsection{Other models ???}
+% \subsection{Other models ???}
 
-TODO MAYBE ?
+% TODO MAYBE ?
 
-\subsection{Cue Conflict ???}
+% \subsection{Cue Conflict ???}
 
-TODO MAYBE ?
+% TODO MAYBE ?
 
 \newpage
 \section{Experiments}
@@ -509,7 +509,7 @@ loss. The model overfits a lot on the training data.
 
 This method yields the best results (Fig. \ref{cm_sinin-in-finetune}) The finetuning only occurs
 on the last layers of the ResNet (the classification layers) and not the feature extracting layers.
-Hence, the model does not overfit on textures, but is better to better classify images.
+Hence, the model does not overfit on textures, but is better to better classify images. \medskip \par
 
 \begin{figure}[h!]
   \includegraphics[width = 0.45\textwidth]{imgs/sinin/finetune/fine_tune_confusion_matrix_0.974.eps}
@@ -517,8 +517,7 @@ Hence, the model does not overfit on textures, but is better to better classify 
   \label{cm_sinin-in-finetune}
 \end{figure}
 
-
-
+\noindent
 We can see on the Fig. \ref{loss_finetune} that the train loss is fluctuating a lot even with a small
 learning rate. However, the validation loss is stable and slowly decreasing.
 The validation loss is slightly lower than the training loss, which is a sign of underfitting. This is what we want:
@@ -536,9 +535,15 @@ We can conclude that finetuning had a positive effect on the generalization powe
 \subsection{Noise resistance}
 
 
-One of the major finding in the original paper was that the model trained with a shape bias had developed a better resistance to distortions than the regular model.
-A model trained to recognize textures should behave differently from one trained to recognize shapes on a noised data set.  The key idea is that not all types of distortions are the same and this model should in theory only be resistant to some of them.  We decided to focus on 3 main types of distortions.  A uniform noise, a high pass filter and a low pass filter.
+One of the major finding in the original paper was that the model trained with a 
+shape bias had developed a better resistance to distortions than the regular model.
+A model trained to recognize textures should behave differently from 
+one trained to recognize shapes on a noised data set.  
+The key idea is that not all types of distortions are the same and this model 
+should in theory only be resistant to some of them.  We decided to focus on 3 main types of distortions.  
+A uniform noise, a high pass filter and a low pass filter. \medskip \par
 
+\noindent
 The result of the original paper show us that the SIN model has a better resistance to uniform noise, high pass filtered image and a worse resistance to low pass filtered images.
 This makes sense since a uniform noise has a much worse effect on texture than overall shape. Also, a high pass filter acts as a contour amplifier thus making the shape in the image more prominent. In the same line of thought, a low pass filter has the opposite effect, blurring the edges of an image and making it's shape much less discernible.
 
@@ -605,10 +610,19 @@ Secondly, we were expecting the SIN model to under perform in the low pass area 
 This goes against the results of the original paper and against common sense. 
 It is possible the levels of blur applied were too strong for the IN model to detect any texture.
 
+\subsection{Github}
+
+TODO: PUT GITHUB LINK HERE
+
+\newpage
 \section{Approach analysis}
 
 The original scope of our project was to try to reproduce the findings in the reference paper.
-We approached the subject with goal of of validating a simple thesis. Models can be induced with a shape bias during their training by changing the input data and this shape bias can have numerous advantages.
+We approached the subject with goal of of validating a simple thesis. 
+Models can be induced with a shape bias during their training by changing the input data and 
+this shape bias can have numerous advantages.\medskip \par
+
+\noindent
 We would like to think that we achieved this goal, but there were some shortcomings in our methods that may have impacted our results and we would like to clarify their causes and possible effects.
 
 \subsection{Experiments}
@@ -617,10 +631,14 @@ The first liberty we took was to only replicate a subset of the experiments of t
 We can see the excellent quality of the work, 
 because their experiments were easily reproducible, and most of the 
 steps were clearly explained.
-Some of the experiment in the original paper were purely exploratory and we felt did not contribute our main thesis. As an example, we did not choose to test if human vision had an inherent shape bias as it has been a widely idea and outside our scope.
+Some of the experiment in the original paper were purely exploratory and 
+we felt did not contribute our main thesis. 
+As an example, we did not choose to test if human vision had an inherent shape bias as 
+it has been a widely idea and outside our scope. \medskip \par
 
+\noindent
 Also, a lot of the experiments comparing the models against transformed test sets used transformations that we felt were a bit redundant. Some of these transformations like a silhouette detector and a gray scale version of the image were not as important as the different disturbances we introduced.
-We don't feel like omitting to reproduce these experiments weakened our thesis.\\
+We don't feel like omitting to reproduce these experiments weakened our thesis.
 
 \subsection{Dataset}
 
@@ -662,7 +680,6 @@ suggested.
 
 Testing this robustness in related areas where shape bias is more important than image classification, like for example in image segmentation, could prove to be quite interesting.
 
-\newpage
 \section{Conclusion}
 
 We were able to replicate most of the experiences of the original paper and arrive at the same results.
