@@ -162,13 +162,14 @@ According to studies from \cite{gatys2017textures} and \cite{brendel2019approxim
 CNNs are able to classify texturized images even if their shape structure is destroyed.
 Moreover, the same paper from \cite{brendel2019approximating} also
 showed that CNNs with constrained receptive field sizes can reach competitive accuracies on ImageNet.
-It is also worth noticing that small receptive fields cannot capture the overal shape of an image.
+It is also worth noticing that small receptive fields 
+cannot capture the overal shape of an image. \medskip \par
+
+\noindent
 These results have led the authors of the paper we've analysed, \cite{geirhos2018imagenettrained}, 
 to emit a new hypothesis: the texture hypothesis, where "in contrast to the
 common assumption, object textures are more important than global object shapes for CNN object
 recognition". \medskip \par
-
-\bigskip
 
 Our objective in this report is to submit those hypothesis to a test through diverse experiments 
 and validate the results obtained by the original authors in our own environment .
@@ -182,13 +183,11 @@ We used Imagenette \cite{fastai2019}, a subset of the Imagenet dataset created
 by fastai to conduct our experiments.
 This ensured that our results would be comparable to the authors, 
 while keeping an acceptable size for the dataset given the time and material constraints.
-Imagenette contains 13394 images.
-Imagenette's train/test split is 70/30: 9469 images for the train and validation set, and 3925 images for the test set.
-It contains 10 easily classifiable classes from Imagenet, namely
+Imagenette contains 13394 images of 10 easily classifiable classes from Imagenet, namely
 \textit{tench, English springer, cassette player, chain saw, church, 
 French horn, garbage truck, gas pump, golf ball, parachute}.
-The classes are balanced with around 950 images in each one. \smallskip \par
-\vspace{-0.3cm}
+The classes are balanced with around 950 images in each one. \medskip \par
+% \vspace{-0.3cm}
 \noindent
 This dataset is more easily classifiable than Imagenet in less time, which fits our purpose.
 We used the '160px' version of the images, where the shortest size of the images are resized to that size, 
@@ -197,10 +196,9 @@ with their aspect ratio maintained.
 \subsection{Style Transfer}
 \label{2.2-style-transfer}
 
-This procedure ensures that the images conserve their edges, but not their textures.
-In order to destroy all the texture information of an image without its edges, we used style transfer like in
-the original paper.
-However, we generated our own Stylized-Dataset. \medskip \par
+This procedure ensures that the images conserve their edges without the textures.
+To remove all the texture information of an image, we used style transfer like in
+the original paper. \medskip \par
 
 \noindent
 The image for which you want to change the texture, but keep the edges is called the \textbf{content image}.
@@ -213,12 +211,12 @@ with a random texture (a parachute's fabric and color)
 from sampled from the Describable Texture Dataset \cite{cimpoi14describing}. \medskip \par
 
 \noindent
-Our first aproach was to use a random image from the Texture Dataset to stylize Imagenette. However, 
+Our first aproach was to use a random textures to stylize Imagenette. However, 
 the edges of the images were sometimes destroyed, and were not identifiable by humans. \medskip \par
 
 \noindent
-To avoid poor quality images, we handpicked 11 texture images that generated good quality stylized images.
-Each time an Imagenette image was to be stylized, we picked a texture image randomly from our 11 textures.
+To avoid poor quality images, we handpicked 11 textures that generated good stylized images.
+Each time an image was to be stylized, we picked a texture image randomly from our pool.
 This ensured that the texture of a stylized image had no correlation with its original class. \medskip \par
 
 \noindent
@@ -233,13 +231,13 @@ This pretrained architecture uses a VGG-19 network to encode the content and sty
 An AdaIN layer is then used to perform style transfer in the feature space.   
 A Decoder then decodes the AdaIN output to image space.
 
-\begin{figure}[h!]\center
-  \includegraphics[width=0.45\textwidth]{imgs/adain_architecture}
-  \caption{AdaIn style transfer network.}
+\begin{center}
+  \captionsetup{type=figure}
+  \includegraphics[width=0.35\textwidth]{imgs/adain_architecture}
+  \captionof{figure}{AdaIn style transfer network.}
   \label{adain-archi}
-\end{figure}
+\end{center}
 
-\newpage
 \subsection{Metrics}
 
 We decided to only use the multi-class Accuracy, as our class are balanced, and not too numerous. \medskip \par
@@ -256,11 +254,50 @@ contains 10 classes, so we deemed it wasn't necessary to introduce this metric.
 
 \subsection{ResNet}
 
-TODO
+The authors of the original papers used ResNet-50 
+alongside with other variants of the model in their experiments. 
+Due to the great computational cost of training such behemoths, 
+we've settled with a more modest ResNet-18 to fit our time constraints and smaller dataset. \medskip \par
 
-\subsubsection{Loss Function} % ADAM ETC? 
+\noindent
+ResNet is based on the idea that stacking layers in a CNN should not degrade the network performance,
+because any unecessary layer could in theory be simplified 
+to an identity function that wouldn't change anything. \medskip \par
 
-\subsubsection{Optimisation Function}
+\noindent
+We know, however, that due in big part to the vanishing gradient problem, 
+where the gradient becomes smaller and smaller as multiplications are stacked during backpropagation, 
+this is not the case. 
+A network with a large number of layers is also more prone to overfit, 
+if trained with sufficient data, due to the increased number of parameters. \medskip \par
+
+\noindent
+What's more, learning the identity function is a hard task for a neural network to do. 
+Most of the time, neurons will at best, approximate the identity function, 
+leading to a increasing decay as layers are added to the network. \medskip \par
+
+\noindent
+The authors of ResNet, \cite{resnet2015}, proposed a ground-breaking solution to the problem, 
+by introducing 'skip-connections' 
+that would map a layer to another beyond its next-in-line neighbor. \medskip \par
+
+\noindent
+This dual-connection facilitates the learning of the identity function as 
+the next layer could be zero-ed out by the new function, leaving only the current layer as output to 
+the skip-connection, as illustrated in Fig. \ref{resnet-res-block}. 
+This is due to the newly formed $F(x) + x$ function where $F(x)$ refers to the connection to be skipped.
+\vspace{0.7cm}
+
+\begin{center}
+  \captionsetup{type=figure}
+  \includegraphics[width=0.3\textwidth]{imgs/resnet/residual-block}
+  \captionof{figure}{Residual block: identity shortcut connection.}
+  \label{resnet-res-block}
+\end{center}
+
+% \subsubsection{Loss Function} % ADAM ETC? 
+
+% \subsubsection{Optimisation Function}
 
 
 % \subsection{Other models ???}
@@ -407,7 +444,7 @@ We defined the max learning rate at 1e-4.
 
 \subsection{Robustness of shape-based representations}
 
-We reproduce the 4 experiments of the original paper to prove the robustness of a shape-biased CNN
+We reproduced the 4 experiments of the original paper to prove the robustness of a shape-biased CNN
 (the CNN trained on SIN),
 and show the fragility of the texture biased CNN (the CNN trained on IN). 
 
