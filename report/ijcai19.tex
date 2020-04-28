@@ -265,7 +265,7 @@ because any unecessary layer could in theory be simplified
 to an identity function that wouldn't change anything. \medskip \par
 
 \noindent
-We know, however, that due in big part to the vanishing gradient problem, 
+We know, however, that due in part to the infamous vanishing gradient problem, 
 where the gradient becomes smaller and smaller as multiplications are stacked during backpropagation, 
 this is not the case. 
 A network with a large number of layers is also more prone to overfit, 
@@ -273,8 +273,8 @@ if trained with sufficient data, due to the increased number of parameters. \med
 
 \noindent
 What's more, learning the identity function is a hard task for a neural network to do. 
-Most of the time, neurons will at best, approximate the identity function, 
-leading to a increasing decay as layers are added to the network. \medskip \par
+Most of the time, neurons will, at best, approximate the identity function, 
+which would lead to an increasing decay as layers are added to the network. \medskip \par
 
 \noindent
 The authors of ResNet, \cite{resnet2015}, proposed a ground-breaking solution to the problem, 
