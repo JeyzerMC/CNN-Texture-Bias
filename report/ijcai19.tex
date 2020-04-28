@@ -556,7 +556,10 @@ loss. The model overfits a lot on the training data.
 \subsubsection{SIN + IN + finetune(IN) \texorpdfstring{\textrightarrow} .IN}
 
 This method yields the best results (Fig. \ref{cm_sinin-in-finetune}) The finetuning only occurs
-on the last layers of the ResNet (the classification layers) and not the feature extracting layers.
+on the last layers of the ResNet (the classification layers) and 
+not the feature extracting layers. \medskip \par
+
+\noindent
 Hence, the model does not overfit on textures, but is better to better classify images. \medskip \par
 
 \begin{center}
@@ -595,67 +598,82 @@ A uniform noise, a high pass filter and a low pass filter. \medskip \par
 
 \noindent
 The result of the original paper show us that the SIN model has a better resistance to uniform noise, high pass filtered image and a worse resistance to low pass filtered images.
+
+\noindent
 This makes sense since a uniform noise has a much worse effect on texture than overall shape. Also, a high pass filter acts as a contour amplifier thus making the shape in the image more prominent. In the same line of thought, a low pass filter has the opposite effect, blurring the edges of an image and making it's shape much less discernible.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width = 0.4\textwidth]{imgs/image_uniform}
+\includegraphics[width = 0.44\textwidth]{imgs/image_uniform}
 \caption{Uniform noise}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width = 0.4\textwidth]{imgs/image_high}
+\includegraphics[width = 0.44\textwidth]{imgs/image_high}
 \caption{High pass}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width = 0.4\textwidth]{imgs/image_low}
+\includegraphics[width = 0.47\textwidth]{imgs/image_low}
 \caption{Low pass}
 \end{figure}
 
 \subsubsection{Experiment}
 
 We decided to reproduce this experiment with our own data.
-All of the distorted data sets are created form the regular Imagenette data set. We applied the distortions at different scale gradually increasing the effect on the images.
+All of the distorted data sets are created form the regular Imagenette data set. 
+We applied the distortions at different scale gradually increasing the effect on the images. \medskip \par
 
+\noindent
 We then compared the results of our three trained models against those different noise levels.
 The models were the regular resnet trained on imagenette (IN), a resnet trained on a stylised version of imagenette (SIN) and one trained on a combination of this data (SIN+IN).
-Each model was given the same test set on which a gradually increasing noise was applied and an accuracy was computed.
+Each model was given the same test set on which a gradually increasing noise was applied and an accuracy 
+was computed. \medskip \par
 
+\noindent
 The different levels of noise were chosen arbitrarily to create different enough distortions. The original values and algorithms used in the paper were not available.
 
 \subsubsection{Results}
 
 In all of the test we conducted, the SIN model always start off worse. This is to be expected because it was trained on stylized images 
-and the test set for the distorted images is based on regular images. The IN and SIN+IN model start at about the same accuracy.
+and the test set for the distorted images is based on regular images. 
+The IN and SIN+IN model start at about the same accuracy. \medskip \par
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width = 0.45\textwidth]{imgs/uniform}
+\includegraphics[width = 0.43\textwidth]{imgs/uniform}
 \caption{Uniform noise}
 \label{uniform_noise}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width = 0.45\textwidth]{imgs/high_pass}
+\includegraphics[width = 0.43\textwidth]{imgs/high_pass}
 \caption{High pass}
 \label{high_pass}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width = 0.45\textwidth]{imgs/low_pass}
+\includegraphics[width = 0.43\textwidth]{imgs/low_pass}
 \caption{Low pass}
 \label{low_pass}
 \end{figure}
 
-The figures clearly show the shape biased models have a better resistance to noise the regular model.
+\noindent
+The figures clearly show that the shape biased models have a better 
+resistance to noise the regular model. \medskip \par
 
+\noindent
 We were surprised by the results for two reasons.
-First, the SIN model started off at a worse accuracy, so we were expecting to compare the resistance to distortions as a relative drop from the original accuracy but it managed to have a better absolute accuracy than the regular model.
+First, the SIN model started off at a worse accuracy, 
+so we were expecting to compare the resistance to distortions as 
+a relative drop from the original accuracy but it managed to have a better absolute accuracy 
+than the regular model. \medskip \par
+
+\noindent
 Secondly, we were expecting the SIN model to under perform in the low pass area (Fig. \ref{low_pass}), but it managed to be better than the IN model. 
 This goes against the results of the original paper and against common sense. 
 It is possible the levels of blur applied were too strong for the IN model to detect any texture.
@@ -692,24 +710,39 @@ We don't feel like omitting to reproduce these experiments weakened our thesis.
 
 \subsection{Dataset}
 
-Most of the experiments depend on comparing two identical models trained on two versions of the same data set. One version left intact and another that saw stylised using the AdaIn model.
+Most of the experiments depend on comparing two identical models trained on two versions 
+of the same data set. One version left intact and 
+another that saw stylised using the AdaIn model. \medskip \par
 
+\noindent
 This is were we took most of our liberties because of our time and resources constraints.
 The data set we chose to use for was Imagenette, a subset of the Imagenet data set.
-This data set is limited by many factors. First, the number of images is considerably inferior to imagenet. Secondly, the images have lower resolution. 160 by 160 pixels in the Imagenette variant we used. Thirdly, the data set only contains 10 classes as opposed to Imagenet who has 200.
+This data set is limited by many factors. First, the number of images is considerably inferior to imagenet. 
+Secondly, the images have lower resolution. 160 by 160 pixels in the Imagenette variant we used. 
+Thirdly, the data set only contains 10 classes as opposed to Imagenet who has 200. \medskip \par
 
+\noindent
 We experimented with other data sets to solve these issues, but ended up rejecting them for various reasons. The cifar10 data set's images were too low resolutions and we found the AdaIn model could not stylise them.
 The original Imagenet dataset was too voluminous and the training time was too long to enable us to experiment.
-Ultimately, we stayed with Imagenette and it's limitations.
+Ultimately, we decided to remain with Imagenette and it's limitations. \medskip \par
 
+\noindent
 The number of images reduced out training time, but also reduced the size of the test set, thus giving us less confidence in our metrics.
-The lower resolution also helped our experimentation velocity by decreasing the training time, but it may have had an effect on the resistance to noise experiment. It is possible that noise applied to low resolution images has a different effect.
+The lower resolution also helped our experimentation velocity by decreasing the training time, 
+but it may have had an effect on the resistance to noise experiment. 
+It is possible that noise applied to low resolution images has a different effect. \medskip \par
+
+\noindent
 The fact that we only have 10 classes was helpful when we were visualising our confusion matrices but rendered one of our metric, top k accuracy, completely, unusable. The top k accuracy was used in the original paper as the top 5 accuracy on a dataset with 200 classes. It is meaningless to have a top 5 accuracy in a 10 classes dataset and reducing there is no k value for which this metric would start to be meaningful.
 
 \subsection{Models}
 
-The last divergence we took from the paper was our choice of models. The authors compared the effect of shape bias on 4 model architectures. Granted all of these models were slight variations of the ResNet-50, the variation of models add wight to their experiments.
+The last divergence we took from the paper was our choice of models. 
+The authors compared the effect of shape bias on 4 model architectures. 
+Granted all of these models were slight variations of the ResNet-50, 
+the variation of models add wight to their experiments. \medskip \par
 
+\noindent
 In our case, we focused out training on ResNet-18. This model has a lot less parameters and is faster to train. Taking into consideration the fact that our images are of lower resolution we decided this architecture was powerful enough.
 
 \subsection{Results}
@@ -732,11 +765,14 @@ Testing this robustness in related areas where shape bias is more important than
 
 \section{Conclusion}
 
-We were able to replicate most of the experiences of the original paper and arrive at the same results.
+We were able to replicate most of the experiences of the original paper and reach the same results.
 Our experiments showed that training a network with a combination of regular and stylised images increased its classification performance and robustness to disturbances.
-This show a clear advantage of models that have a strong shape bias.
+This show a clear advantage for models that have a strong shape bias. \medskip \par
 
-This is encouraging as it show that we are getting closer to understanding what is learned by out models. It's also interesting to know that we can introduce biases into our model by transforming the data we feed into it.
+\noindent
+This is encouraging as it show that we are getting closer to understanding what is learned by out models. 
+It's also interesting to know that we can introduce biases into our model by transforming the data 
+we feed into it.
 
 
 \newpage
